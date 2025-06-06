@@ -1,0 +1,519 @@
+/* Landing.module.css */
+
+/* Global body styles */
+:global body {
+    margin: 0;
+    padding: 0;
+    background-color: #f77c2e; /* Jack Rabbit orange */
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+  }
+  
+  /* App container */
+  .app {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Top Bar */
+  .topBar {
+    display: flex;
+    align-items: center;
+    gap: 70%;
+    padding: 8px 16px;
+  }
+  .itemLeft {
+    display: flex;
+    justify-content: space-evenly;
+    width: 20%;
+    align-items: start;
+  }
+  .topBarLogo {
+    width: 23%;
+    height: auto;
+    object-fit: contain;
+  }
+  .buyButton,
+  .walletButton {
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 18px;
+    border: 3px solid #1e293b;
+    transform: skewX(-6deg);
+    cursor: pointer;
+  }
+  .buyButton {
+    margin-top: 2%;
+    background-color: #ffcf48;
+  }
+  .walletButton {
+    background-color: #f55454;
+  }
+  
+  /* Main Mascot & Images */
+  .images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4%;
+    margin-top: 40px;
+    width: 75%;
+    margin-left: 18%;
+  }
+  .catchmeImg {
+    width: 45%;
+    max-width: 50%;
+    height: auto;
+  }
+  .mascotWrapper {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    height: auto;
+  }
+  .mascotImg {
+    width: 35%;
+    height: auto;
+    z-index: 1;
+    position: relative;
+    right: 28%;
+    bottom: 1.5em;
+  }
+  .sacksImg {
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: auto;
+    z-index: 2;
+  }
+  
+  /* Animated Jack Banners */
+  .jackBanner {
+    width: 100vw;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 24px;
+    padding: 10px 0;
+    margin: 0;
+  }
+  .jackWord {
+    margin: 0 -10px;
+    display: inline-block;
+  }
+  .leftBanner {
+    background-color: #ffe14f;
+    color: #f55454;
+    transform: rotate(3.5deg);
+    border-top: 5px solid #f55454;
+    border-bottom: 5px solid #f55454;
+  }
+  .rightBanner {
+    background-color: #f55454;
+    color: #ffe14f;
+    transform: rotate(-1deg);
+    border-top: 5px solid #ffe14f;
+    border-bottom: 5px solid #ffe14f;
+  }
+  .scrollText {
+    display: inline-block;
+    animation: scroll-left 18s linear infinite;
+    font-weight: bold;
+    font-size: 22px;
+    color: #f55454;
+  }
+  .reverse {
+    animation: scroll-right 18s linear infinite;
+    color: #ffe14f;
+  }
+  .scrollText span {
+    white-space: nowrap;
+    padding-right: 50px;
+  }
+  
+  @keyframes scroll-left {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+  }
+  
+  /* Holder Message Section */
+  .holderMessage {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .headline {
+    font-family: 'Bangers', cursive;
+    font-size: 56px;
+    color: white;
+    letter-spacing: 2px;
+    text-shadow:
+      -2px -2px 0 #000,
+       2px -2px 0 #000,
+      -2px  2px 0 #000,
+       2px  2px 0 #000;
+    margin-bottom: 0;
+    z-index: 2;
+  }
+  .subhead {
+    font-family: 'Bangers', cursive;
+    background-color: #ffcf48;
+    font-size: 36px;
+    padding: 8px 25px;
+    color: white;
+    letter-spacing: 1px;
+    transform: skewX(-4deg);
+    border: 3px solid black;
+    text-shadow:
+      -2px -2px 0 #000,
+       2px -2px 0 #000,
+      -2px  2px 0 #000,
+       2px  2px 0 #000;
+    box-shadow: 4px 5px 0 rgba(0,0,0,0.4);
+    z-index: 2;
+  }
+  .holderBox {
+    background-color: white;
+    border: 4px solid black;
+    width: 50%;
+    max-width: 1100px;
+    padding: 40px;
+    margin-top: -20px;
+    box-shadow: 10px 10px 0 #843c0c;
+    transform: skewX(-2deg);
+  }
+  .holderBox p {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.6;
+    color: #000;
+    margin: 0;
+    transform: skewX(2deg);
+  }
+  
+  /* How Jack Runs */
+  .howJackRuns {
+    margin: 80px 0 40px;
+    display: flex;
+    justify-content: center;
+  }
+  .howJackRunsImg {
+    max-width: 600px;
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  /* Animated Rocket Bunny */
+  .rocketbunnyTrack {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    overflow: visible;
+    margin: 40px 0 100px;
+    pointer-events: none;
+  }
+  /* .jackRocketAnimation {
+    position: absolute;
+    width: 24%;
+    top: 0;
+    left: 0;
+    offset-path: path("M 193 -6 C 532 145 728 131 1044 -61");
+    offset-rotate: auto;
+    transition: offset-distance 0.1s linear;
+    z-index: 5;
+  } */
+
+/* in src/styles/Landing.module.css */
+
+.jackRocketAnimation {
+    /* 1) motion path shifted left by 193px (so start is at x=0) */
+    offset-path: path("M -578 -170 C 339 145 535 131 851 -690");
+    -webkit-offset-path: path("M -578 -170 C 339 145 535 131 851 -690");
+  
+    /* 2) use a CSS variable for the distance */
+    offset-distance: var(--jack-distance, 0%);
+    -webkit-offset-distance: var(--jack-distance, 0%);
+  
+    /* 3) anchor the element's left center on the path point */
+    offset-anchor: 0% 40%;
+    -webkit-offset-anchor: 0% -10%;
+  
+    /* keep it rotating along the path */
+    offset-rotate: auto;
+    -webkit-offset-rotate: auto;
+  
+    /* transition for smooth movement */
+    transition:
+      offset-distance 0.1s linear,
+      -webkit-offset-distance 0.1s linear;
+  
+    /* shrink the bunny if you like */
+    width: 24%; 
+
+  }
+  
+  
+  
+  /* Info Cards */
+  .infoCards {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .card {
+    position: relative;
+    width: 280px;
+    padding: 30px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 3px 4px 10px rgba(0,0,0,0.2);
+    transform: rotate(-3deg);
+    z-index: 3;
+    background-color: white;
+    text-align: left;
+  }
+  .card:hover {
+    transform: scale(1.03) rotate(-2deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+  }
+  .stack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    z-index: -1;
+    top: 5px;
+    left: 5px;
+    transform: rotate(1deg);
+  }
+  .firstRedStack {
+    background-color: #f55454;
+    transform: rotate(3.5deg);
+    top: -9px;
+    left: -3px;
+  }
+  .firstYellowStack {
+    background-color: #ffcf48;
+    transform: rotate(8.5deg);
+    top: -20px;
+  }
+  .firstCardParagraph {
+    color: #000;
+    transform: rotate(8.5deg);
+  }
+  .secondYellowStack {
+    background-color: #ffcf48;
+    transform: rotate(3.5deg);
+    top: -9px;
+    left: -3px;
+  }
+  .secondWhiteStack {
+    background-color: #fff;
+    transform: rotate(8.5deg);
+    top: -20px;
+  }
+  .secondCardParagraph {
+    color: #FFCB3C;
+    transform: rotate(8.5deg);
+  }
+  .thirdRedStack {
+    background-color: #f55454;
+    transform: rotate(8.5deg);
+    top: -20px;
+  }
+  .thirdWhiteStack {
+    background-color: #fff;
+    transform: rotate(3.5deg);
+    top: -9px;
+    left: -3px;
+  }
+  .thirdCardParagraph {
+    color: #fff;
+    transform: rotate(8.5deg);
+  }
+  
+  /* Specific card styles */
+  .firstCard {
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1),0 6px 6px rgba(0,0,0,0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .secondCard {
+    background-color: #f55454;
+    color: #1e293b;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1),0 6px 6px rgba(0,0,0,0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .thirdCard {
+    background-color: #ffcf48;
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1),0 6px 6px rgba(0,0,0,0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  
+  /* Who Stayed Box */
+  .whoStayedContainer {
+    width: 100%;
+    max-width: 900px;
+    margin: 15% 0 0 12.7%;
+    position: relative;
+    padding: 20px;
+  }
+  .whoStayedTitle {
+    background-color: #FFD43B;
+    color: #fff;
+    font-size: 28px;
+    padding: 10px 30px;
+    display: inline-block;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    transform: skewX(-4deg);
+    border: 3px solid black;
+    text-shadow: -2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;
+    box-shadow: 4px 5px 0 rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 2;
+  }
+  .whoStayedBox {
+    background-color: #fff;
+    border: 5px solid #000;
+    box-shadow: 10px 10px 0 #722e00;
+    padding: 40px 30px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    color: #000;
+    position: relative;
+    top: -30px;
+    z-index: 1;
+    line-height: 1.6;
+    transform: skewX(-3deg);
+  }
+  
+  /* Tokenomics Section */
+  .tokenomicsImg {
+    width: 40%;
+    max-width: 400px;
+    margin-bottom: 30px;
+  }
+  .richRabbitImg {
+    width: 25%;
+    min-width: 180px;
+  }
+  .floatingRabbit {
+    position: sticky;
+    top: 120px;
+    left: 0;
+    width: 25%;
+    z-index: 2;
+    animation: floatCloud 4s ease-in-out infinite;
+  }
+  .tokenomicsSection {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+  }
+  .tokenomicsVisuals {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10%;
+    width: 100%;
+    margin-top: -90px;
+  }
+  .chartImg {
+    max-width: 30%;
+  }
+  @keyframes floatCloud {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+  }
+  
+  /* Join Us Section */
+  .joinUsSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+  }
+  .joinInner {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 40px;
+  }
+  .joinLeft {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .cashRabbitImg {
+    width: 260px;
+    margin-top: 0;
+    z-index: 2;
+    position: relative;
+    margin-bottom: -80px;
+  }
+  .joinRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  .joinusImg {
+    width: 15em;
+  }
+  .socialIcons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  .socialIcon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: contain;
+  }
+  .joinDescriptionBox {
+    margin-top: 30px;
+    position: relative;
+    z-index: 1;
+  }
+  .joinDescription {
+    background: white;
+    padding: 25px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    transform: skewX(-2deg);
+    box-shadow: 6px 8px 12px rgba(0,0,0,0.3);
+    border: 4px solid black;
+    line-height: 1.6;
+    max-width: 800px;
+  }
+  

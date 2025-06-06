@@ -1,0 +1,731 @@
+/* =======================================================
+   RESET & BASE 
+   ======================================================= */
+   * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    /*font-family: 'Bangers', cursive;*/
+    font-family: 'Nunito', sans-serif;
+    /*background-color: #F6782F;*/
+    background: linear-gradient(to bottom right, #f97316, #fde68a);
+    color: white;
+  }
+
+  
+  
+  /* =======================================================
+     HEADER / NAV 
+     ======================================================= */
+  .dapp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+  }
+  .header-logo {
+    width: 48px;
+    height: auto;
+  }
+  .header-nav {
+    display: flex;
+    gap: 16px;
+  }
+  .nav-btn {
+    background: white;
+    color: #1E293B;
+    border: 3px solid #1E293B;
+    padding: 8px 16px;
+    font-size: 18px;
+    transform: skewX(-6deg);
+    cursor: pointer;
+  }
+  
+  /* =======================================================
+     HERO 
+     ======================================================= */
+  .hero {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+  .hero h1 {
+    font-size: 56px;
+    text-shadow: 2px 2px 0 #000;
+    font-family: 'LuckiestGuy', cursive;
+    letter-spacing: 1px;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 24px;
+    font-family: 'LuckiestGuy', cursive;
+    font-style: italic;
+    margin-top: 8px;
+    text-shadow: 1px 1px 0 #000;
+    color: white;
+  }
+
+
+
+  
+  /* =======================================================
+     PANEL CONFIG 
+     ======================================================= */
+  .pools {
+    position: relative;
+    width: 60%;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+  }
+  
+  .panel {
+    background: #ffeebb;
+    color: #1E293B;
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+    transform: skewX(-3deg);
+    padding: 24px;
+    margin-top: 40px;
+    overflow: visible; /* allows buttons to overflow */
+  }
+  
+  /* =======================================================
+     STAKE / UNSTAKE TAB STYLING
+     ======================================================= */
+  .stake-tabs {
+    position: absolute;
+    top: -20px;
+    left: 35%;
+    transform: translateX(-50%) skewX(-6deg);
+    display: flex;
+    gap: 60%;
+    z-index: 1;
+  }
+  .tab {
+    padding: 8px 24px;
+    color: white;
+    font-size: 20px;
+    border: 3px solid #1E293B;
+    transform: skewX(-6deg);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .tab:hover {
+    transform: scale(1.03) rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+  
+  .tab.stake   { 
+    background: #3d822a; 
+    color: white;
+  font-weight: bold;
+  font-style: italic;
+  border: 4px solid #1c1c1c;
+  box-shadow: 0 5px 0 #1c1c1c;
+  transform: perspective(1px) translateZ(0);
+  transition: all 0.1s ease-in-out;
+  }
+
+  /* Pressed effect */
+.tab.stake:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #1c1c1c;
+}
+  .tab.unstake { 
+    background: #d00000;
+    color: white;
+  font-weight: bold;
+  font-style: italic;
+  border: 4px solid #1c1c1c;
+  box-shadow: 0 5px 0 #1c1c1c;
+  transition: all 0.1s ease-in-out; 
+  }
+
+  .tab.unstake:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #170505;
+  }
+  
+  /* =======================================================
+     DATA TABLE (Stake/Unstake)
+     ======================================================= */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+  .data-table th,
+  .data-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    vertical-align: middle;
+  }
+  .data-table th {
+    color: #1E293B;
+  }
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+  .token-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+  
+  /* =======================================================
+     REWARDS TAB STYLING
+     ======================================================= */
+  .rewards-tabs {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%) skewX(-6deg);
+    z-index: 1;
+  }
+  .tab.rewards {
+    background: #1E293B;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    border: 4px solid #1c1c1c;
+    box-shadow: 0 5px 0 #1c1c1c;
+    transition: all 0.1s ease-in-out;
+  }
+
+  .tab.rewards:active {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 #1c1c1c;
+  }
+  
+  /* =======================================================
+     HORIZONTAL REWARDS LIST
+     ======================================================= */
+  /* .rewards-panel {
+    padding-bottom: 48px;  
+  } */
+  .rewards-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    list-style: none;
+    margin: 0;
+    padding-top: 2%;
+  }
+  .reward-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  /* icon */
+  .reward-icon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 8px;
+  }
+  /* amount text */
+  .reward-amount {
+    color: #1E293B;
+    font-weight: bold;
+    margin-bottom: 5%;
+  }
+  /* Claim button skewed & overflowing */
+  .reward-item .claim-btn {
+    position: absolute;
+    bottom: -60%;
+    transform: skewX(-6deg);
+    background: #1E293B;
+    color: white;
+    border: 3px solid #f6782f;
+    padding: 6px 16px;
+    cursor: pointer;
+    height: 50%;
+  }
+  .reward-item .claim-btn:hover {
+    background: #16212b;
+  }
+  
+  /* ----------------------------------------------------------------------- */
+/*  DESCRIPTION ROW UNDER THE HEADERS                                      */
+/* ----------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- */
+/* DESCRIPTION ROW UNDER THE JACK DATA                                    */
+/* ---------------------------------------------------------------------- */
+
+.data-table tbody tr.row-desc td:first-child {
+  /* hide the first blank cell */
+  visibility: hidden;
+}
+
+/* optional: tighten up row spacing */
+.data-table tbody tr {
+  border-bottom: none;
+}
+
+/* kill the line between the data row and its description row */
+.data-table tbody tr:first-child td {
+  border-bottom: none;
+}
+
+/* remove the border and bottom padding from the main data row */
+.data-table tbody tr.data-row td {
+  border-bottom: none;
+  padding-bottom: 0px;
+  font-style: italic;
+  color: #666;
+}
+
+
+
+
+/* ────────────────────────────────────────────────────────── */
+/*  MODAL VISIBILITY & OVERLAY                               */
+/* ────────────────────────────────────────────────────────── */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.modal:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 87%);
+}
+
+/* ────────────────────────────────────────────────────────── */
+/*  OUTER SKEWED DARK PANEL                                  */
+/* ────────────────────────────────────────────────────────── */
+.modal-panel {
+  position: relative;
+  background: #1E293B;
+  padding: 0;
+  width: 90%;
+  max-width: 500px;
+  height: 10.3em; /* 🔥 Add or increase this line */
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+  transform: skewX(-3deg);
+  color: #fff;
+  z-index: 1;
+}
+
+/* ────────────────────────────────────────────────────────── */
+/*  SKEWED‑BACK TITLE                                        */
+/* ────────────────────────────────────────────────────────── */
+.modal-title {
+  margin: 0;
+  padding: 16px 24px;
+  font-size: 4rem;
+  text-align: center;
+  transform: skewX(3deg);
+  text-shadow: 2px 2px 0 #f55454;
+}
+ /* pull the title outside */
+
+
+/* ensure the rest of your modal-inner / modal-row etc. sit lower */
+.modal-inner    { transform: skewX(3deg); /*...*/ }
+.modal-row      { transform: skewX(-15deg); /*...*/ }
+
+/* ────────────────────────────────────────────────────────── */
+/*  INNER WHITE “BAR” + HORIZONTAL ROW                       */
+/* ────────────────────────────────────────────────────────── */
+.modal-inner {
+  transform: skewX(3deg);
+  padding: 0;
+}
+.modal-row {
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin: 24px 24px 24px 36px;
+  height: 48px;
+  flex: 1;
+  border: none;
+  background: #ffffff;
+  font-size: 1rem;
+  transform: skewX(-15deg);
+  width: 80%;
+  justify-content: center;
+}
+
+/* dropdown “chip” half‑in, half‑out */
+.modal-select .token-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+}
+.modal-select select {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  padding-right: 16px; /* leave room for native arrow */
+}
+
+
+
+/* ────────────────────────────────────────────────────────── */
+/*  FOOTER: BALANCE + CONFIRM BUTTON                         */
+/* ────────────────────────────────────────────────────────── */
+.modal-footer {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: skewX(3deg); /* cancel outer skew */
+}
+.modal-balance {
+  font-size: 0.9rem;
+  color: #eee;
+  margin-left: 65%;
+}
+
+.modalActionBtn {
+      padding: 4px 10px;
+    background: #1E293B;
+    color: white;
+    font-size: 1em;
+    font-family: 'Bangers', cursive;
+    border: 3px solid white;
+    transform: skewX(-6deg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modalActionBtn:hover {
+    transform: scale(1.03) rotate(-1deg);
+    transition: all 0.3s ease;
+}
+
+
+
+.modal-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+
+
+/* ────────────────────────────────────────────────────────── */
+/*  CLOSE “×” BUTTON                                         */
+/* ────────────────────────────────────────────────────────── */
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  transform: skewX(-3deg);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ────────────────────────────────────────────────────────── */
+/*  “Comic‑style” skewed select + input combo inside modal   */
+/* ────────────────────────────────────────────────────────── */
+
+.modal-field {
+  display: flex;
+  align-items: center;
+  background: #ffffff00;
+  transform: skewX(-6deg);
+  overflow: visible;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0 16px;
+  margin-right: 20%;
+
+}
+
+
+
+.modal-select {
+  background: #1E293B;
+  color: white;
+  padding: 4px 24px;
+  font-size: 1rem;
+  font-family: 'Bangers', cursive;
+  transform: skewX(6deg);
+  margin-left: -50px;
+  border: 3px solid white;
+  min-width: 100px;
+}
+
+
+.modal-select::-ms-expand {  /* IE10+ arrow hack */
+  display: none;
+}
+
+
+
+/* the amount input field */
+.modal-input {
+  flex: 1;
+  height: 32px;
+  border: none;
+  border-radius: 0px;
+  margin-left: -3px;
+  padding: 0 8px;
+  font-size: 1rem;
+  text-align: right;
+  outline: none;
+}
+
+/* ensure placeholder is muted */
+.modal-input::placeholder {
+  color: #999;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.modal-input::-webkit-inner-spin-button,
+.modal-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.modal-input {
+  -moz-appearance: textfield;
+  appearance: none;    /* standard, for other browsers */
+}
+
+/* container for our select+icons */
+.token-field {
+  position: relative;
+  display: inline-block;
+  transform: skewX(-6deg);
+  margin-right: 8px;
+}
+
+.token-name {
+  color: #1e293b;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 36px;
+}
+
+/* the token icon on the left */
+.token-field__icon {
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: auto;
+}
+
+.token-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1E293B;
+  padding: 5px 16px;
+  transform: skewX(6deg);
+  border: 3px solid white;
+  font-family: 'Bangers', cursive;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.confirm-button-wrapper {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%) skewX(3deg);
+  z-index: 2;
+}
+
+
+.token-label img {
+  width: 24px;
+  height: 24px;
+}
+
+
+/* our fake ▼ on the right */
+.token-field__arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%) skewX(6deg);
+  color: #fff;
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.modal-input-field{
+  width: 36%;
+}
+
+
+/* UPDATES */
+/* FLOATING UP (carrot) */
+/* Floating with different rhythms */
+.float-up {
+  animation: floatUp 3s ease-in-out infinite;
+}
+.float-down {
+  animation: floatDown 4s ease-in-out infinite;
+}
+
+/* Keyframes for each float style */
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes floatDown {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(5px); }
+}
+
+/* Glow: ACTIVE tab */
+/* Active glow (clean, no border or ring) */
+.tab-glow-active {
+  animation: floatUp 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px gold) drop-shadow(0 0 10px gold);
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px gold) drop-shadow(0 0 10px gold);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px gold) drop-shadow(0 0 20px gold);
+  }
+}
+
+
+/* Aura pulse animation */
+@keyframes auraPulse {
+  0% { filter: drop-shadow(0 0 4px gold) drop-shadow(0 0 8px gold); }
+  50% { filter: drop-shadow(0 0 10px gold) drop-shadow(0 0 16px gold); }
+  100% { filter: drop-shadow(0 0 4px gold) drop-shadow(0 0 8px gold); }
+}
+
+/* Tab icon positioning */
+.tab-icon {
+  width: 40px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-right: 12px;
+}
+
+/* Page transition animation */
+.page-wrapper {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.page-exit {
+  opacity: 0;
+}
+
+.tab-icon:active {
+  transform: scale(0.92);
+}
+
+.tab-icon.float-up:active,
+.tab-icon.float-down:active {
+  transform: scale(0.92);
+}
+
+.tab-floating-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: opacity 0.5s ease;
+}
+
+.tab-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+
+
+/* FADE IN OUT   */
+
+.fadeOut {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.fadeIn {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.gray-icon {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.glow-icon {
+  filter: none;
+  box-shadow: 0 0 14px #ffdc73;
+  border-radius: 12px;
+}
+
+.glow {
+  animation: flicker 1s infinite alternate;
+  box-shadow: 0 0 10px 2px #facc15;
+  color: #facc15 !important;
+}
+
+@keyframes flicker {
+  from { opacity: 1; }
+  to { opacity: 0.6; }
+}
+
+.rewards-ready {
+  animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+  from { opacity: 1; }
+  to   { opacity: 0.6; }
+}

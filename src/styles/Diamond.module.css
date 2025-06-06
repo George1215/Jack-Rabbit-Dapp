@@ -1,0 +1,668 @@
+/* src/styles/Diamond.module.css */
+
+/* Global reset & base */
+:global(*) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  :global(body) {
+    font-family: 'Bangers', cursive;
+    background-color: #F6782F;
+    color: white;
+  }
+  
+  /* Header */
+  .dappHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+  }
+  .headerLogo {
+    width: 48px;
+    height: auto;
+  }
+  .headerNav {
+    display: flex;
+    gap: 16px;
+  }
+  
+  /* Nav Tabs */
+  .navTab {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  :global(.navTab:hover) {
+    transform: scale(1.1);
+  }
+  .navTabActive::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Connect button */
+  .navBtn {
+    background: #fff;
+    color: #1E293B;
+    border: 3px solid #1E293B;
+    padding: 8px 16px;
+    font-size: 18px;
+    transform: skewX(-6deg);
+    cursor: pointer;
+  }
+  .connected {
+    background: #FFD767;
+    color: #1E293B;
+    border-color: #1E293B;
+  }
+  
+  /* Hero section */
+  .hero {
+    text-align: center;
+    margin-top: 40px;
+  }
+.hero h1 {
+  font-family: 'LuckiestGuy', cursive;
+  font-size: 56px;
+  color: white;
+  text-shadow: 3px 3px 0 #000;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-family: 'LuckiestGuy', cursive;
+  font-size: 24px;
+  font-style: italic;
+  text-shadow: 1px 1px 0 #000;
+  color: white;
+}
+
+  
+  /* Pools container */
+  .pools {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 40px 32px 64px;
+  }
+  
+  /* Left & right wrappers */
+  .poolsLeftWrapper,
+  .poolsRightWrapper {
+    position: relative;
+    padding-top: 60px;
+  }
+  .poolsLeftWrapper {
+    width: 60%;
+  }
+  .poolsRightWrapper {
+    width: 13%;
+  }
+  
+  /* Shared panel */
+  .panel {
+    background: #ffeebb;
+    color: #1E293B;
+    border: 4px solid #000;
+    transform: skewX(-3deg);
+    padding: 24px;
+
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+    max-height: 36em;
+  }
+  
+  /* Panel tabs (absolute) */
+  .panelTabs {
+    position: absolute;
+    top: 0;
+    display: flex;
+    gap: 16px;
+    z-index: 1;
+  }
+  .leftTabs {
+    top: 5%;
+    margin-left: 25%;
+    gap: 90%;
+  }
+  .rightTabs {
+    right: 20px;
+    top: 5%;
+    margin-right: -20%;
+  }
+  
+  /* Tab buttons */
+  .tab {
+    padding: 8px 24px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transform: skewX(-6deg);
+    border: 3px solid #1E293B;
+  }
+  .stake {
+    background: #3d822a;
+  }
+  .stake:hover {
+    transform: scale(1.03) rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+  .unstake {
+    background: #d00000;
+  }
+  .unstake:hover {
+    transform: scale(1.03) rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+  .rewards {
+    background: #1E293B;
+  }
+  
+  /* Data table */
+  .dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  .dataTable th,
+  .dataTable td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    height: 56px;
+    vertical-align: middle;
+    color: #444;
+  }
+  .dataTable th {
+    color: #1E293B;
+  }
+  .dataTable tbody tr:hover {
+    background-color: rgba(0,0,0,0.03);
+  }
+  .dataTable tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Token icon column */
+  .tokenIcon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+  
+  /* Rewards table */
+  .rewardsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 30%;
+  }
+  .spacerRow th {
+    height: 56px;
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+  .rewardsTable td {
+    padding: 8px;
+    height: 56px;
+    vertical-align: middle;
+  }
+  
+  /* Claim button */
+  .claimBtn {
+    background: #1E293B;
+    color: white;
+    border: 3px solid #f67830;
+    padding: 8px 24px;
+    transform: skewX(-6deg);
+  }
+
+
+  .modalPanel .claimBtn {
+    position: absolute;
+    bottom: -5.5em;               /* half outside panel */
+    left: 30%;
+    transform: skewX(-6deg);
+    z-index: 2;
+    border: 3px solid #ffffff;
+  }
+
+
+
+  .claimBtn:hover {
+    transform: scale(1.03) rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+  
+  
+  /* ────────────────────────────────────────────────────────── */
+  /* MODAL VISIBILITY & OVERLAY                                */
+  /* ────────────────────────────────────────────────────────── */
+  .modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;           /* center vertically */
+    justify-content: center;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .modalVisible {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+  .modalOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.87);
+  }
+  
+  /* ────────────────────────────────────────────────────────── */
+  /* OUTER SKEWED DARK PANEL                                   */
+  /* ────────────────────────────────────────────────────────── */
+  .modalPanel {
+    position: relative;
+    background: #1E293B;
+    width: 30%;
+    max-width: 500px;
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+    transform: skewX(-3deg);
+    color: #fff;
+    padding-top: 3%;
+    min-height: 12em;
+  }
+  
+  /* ────────────────────────────────────────────────────────── */
+  /* SKEWED-BACK TITLE                                         */
+  /* ────────────────────────────────────────────────────────── */
+  .modalTitle {
+    margin: 0;
+    padding: 16px 24px;
+    font-size: 4rem;
+    text-align: center;
+    text-shadow: 2px 2px 0 #f55454;
+    position: absolute;
+    top: -15rem;                    /* half-out of panel */
+    left: 50%;
+    transform: translateX(-50%);   /* center horizontally */
+    z-index: 2;
+    width: 5em;
+  }
+  
+  /* ────────────────────────────────────────────────────────── */
+  /* INNER SKEWED CONTENT                                      */
+  /* ────────────────────────────────────────────────────────── */
+  .modalInner {
+    transform: skewX(3deg);
+    padding: 0 24px 24px;
+  }
+  /* .modalRow {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    transform: skewX(-15deg);
+    width: 80%;
+    min-height: 48px;
+    border: none;
+    margin-left: 15%;
+  } */
+
+  .modalRow {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      transform: skewX(-15deg);
+      width: 80%;
+      min-height: 48px;
+      border: none;
+      margin-left: 15%;
+      position: relative;
+    }
+  
+  /* ────────────────────────────────────────────────────────── */
+  /* TOKEN SELECTOR “PILL”                                      */
+  /* ────────────────────────────────────────────────────────── */
+  .tokenField {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    overflow: visible;
+    padding: 1% 0% 1% 2%;
+    border: 3px solid #fff;
+    transform: skewX(-6deg);
+    background: #1E293B;
+    left: -15%;
+    z-index: 2;
+    min-width: 40%;
+    cursor: pointer;
+  }
+  .tokenFieldIcon {
+    width: 20%;
+    height: auto;
+    margin-right: 8px;
+  }
+  .tokenFieldArrow {
+    margin-left: 1%;
+    font-size: 1rem;
+    color: #fff;
+    pointer-events: none;
+    transform: skewX(6deg);
+  }
+  
+  /* the dropdown list container */
+  /* .modalSearchList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 2px solid #1E293B;
+    transform: skewX(-3deg);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+  } */
+  
+  /* each token option */
+  .searchItem {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #1E293B;
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .searchItem:hover {
+    background: #f0f4f8;
+  }
+  
+  /* icon inside each option */
+  .searchItemImg {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    object-fit: contain;
+  }
+  
+  /* NATIVE <select> STYLING */
+  .modalSelect {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+    padding: 8px 32px;
+    transform: skewX(6deg);
+    z-index: 1;
+  }
+  
+  /* AMOUNT INPUT */
+  .modalInput {
+    flex: 1;
+    border: none;
+    padding: 0 5px;
+    font-size: 1rem;
+    text-align: right;
+    appearance: none;
+    outline: none;
+    position: relative;
+    left: -10%;
+  }
+  .modalInput::-webkit-inner-spin-button,
+  .modalInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .modalInput {
+    -moz-appearance: textfield;
+    appearance: none;
+  }
+  
+  /* FOOTER: BALANCE + CONFIRM BUTTON */
+  .modalFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform: skewX(3deg);
+    padding: 16px 24px;
+  }
+  .modalBalance {
+    font-size: 0.9rem;
+    color: #eee;
+    position: relative;
+    left: 70%;
+  }
+  /* Ensure your Confirm button carries this id in your JSX:
+       <button id="modal-action-btn" …>Confirm</button>
+  */
+  #modal-action-btn {
+    position: absolute;
+    bottom: -1.5em;               /* half-out of panel */
+    right: 35%;
+    padding: 6px 16px;
+    cursor: pointer;
+    transform: skewX(-6deg);
+    border: 3px solid #ffffff;
+    background: #1E293B;
+  }
+  #modal-action-btn:hover {
+    background: #fff;
+    color: #1E293B;
+    transform: scale(1.03) rotate(-1deg);
+  }
+  
+  /* CLOSE “×” BUTTON */
+  .modalClose {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    transform: skewX(-3deg);
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+/* right next to your other “.modal…” rules */
+
+/* .modalSearchList {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    transform: skewX(3deg);   
+    margin-bottom: 4px;
+  } */
+  
+  .modalSearchList {
+    position: absolute;
+    top: 66%;
+    left: 17.5%;
+    width: 70.8%;
+    background: #fff;
+    border: 2px solid #1E293B;
+    transform: skewX(-20deg);
+    z-index: 1000;
+    max-height: 13em;
+    overflow-y: auto;
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform-origin: top left;
+  }
+
+  /*  UPDATES */
+
+ .floatUp {
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+.floatDown {
+  animation: floatDown 3s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes floatDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.navTab {
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.navTab:hover {
+  transform: scale(1.15);
+}
+
+.navTab:active {
+  transform: scale(0.9);
+}
+
+.activeGlow {
+  filter: drop-shadow(0 0 6px gold) drop-shadow(0 0 12px gold);
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 6px gold); }
+  50% { filter: drop-shadow(0 0 14px gold); }
+}
+
+.fadedOut {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.fadedIn {
+  opacity: 1;
+  transform: translateX(0px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.fadeIn {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(6px);
+  }
+}
+
+
+
+
+/* PAGE FADEIN AND OUT*/
+
+.fadeOut {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.fadeIn {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.floatingTabs {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  z-index: 1000;
+}
+
+.tabIcon {
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.tabIcon:hover {
+  transform: scale(1.1);
+}
+
+.activeTab {
+  animation: glowPulse 1.5s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px gold);
+  }
+  50% {
+    filter: drop-shadow(0 0 12px gold);
+  }
+}
