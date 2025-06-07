@@ -8,7 +8,7 @@
   }
   :global(body) {
     font-family: 'Bangers', cursive;
-    background-color: #F6782F;
+    background: linear-gradient(to bottom right, #f97316, #fde68a);
     color: white;
   }
   

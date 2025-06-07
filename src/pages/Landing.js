@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import styles from '../styles/Landing.module.css';
 import { useNavigate } from 'react-router-dom';
 import catchme from '../assets/catchme.png';
-import jackrabbit from '../assets/jackrabbit.png';
-import sack from '../assets/sack.png';
+//import jackrabbit from '../assets/jackrabbit.png';
+import jacklaughing from '../assets/jacklaughing.gif';
+//import sack from '../assets/sack.png';
 import richrabbit from '../assets/richrabbit.png';
 import tokenomics from '../assets/tokenomics.png';
 import chart from '../assets/chart.png';
@@ -40,6 +41,48 @@ export default function Landing() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+useEffect(() => {
+  const paragraphs = [
+    `When the storms hit — rug pulls, FUD, and depegged dreams — most ran, but not Jack Rabbit. With his shades on and conviction in his heart, he stood firm, While others panicked and fled, Jack simply watched, calm and unshaken. He didn’t sell nor did he flinch. That resilience became legend — and from it, JACK was born. But JACK isn’t just a meme tribute to diamond hands but rather an ecosystem designed to reward loyalty and ignite participation. Built on PulseChain, JACK flips the script: it’s deflationary, community-powered, and growing.`,
+    `Upcoming Protocols like JackLP's and Jack NFTs are on the way — letting users earn JACK by providing liquidity or minting value-backed NFTs. Each of these fuels the Jack treasury and staking pools, creating a loop of value and utility. Soon, StakePad and JackSwap will give power to the people: custom staking pools and community-driven trading, built right in. This isn’t just another token chasing attention. It’s a movement. JACK is building a flywheel of value wrapped in meme energy — and it’s just getting started.`
+  ];
+
+  let current = 0, index = 0;
+  const contentEl = document.getElementById("typedContent");
+
+  function typeChar() {
+    if (!contentEl) return;
+    const currentParagraph = paragraphs[current];
+    const char = currentParagraph.charAt(index);
+
+    contentEl.textContent += char;
+    index++;
+
+    if (index < currentParagraph.length) {
+      const delay = ['.', '!', '?'].includes(char) ? 1500 : 50;
+      setTimeout(typeChar, delay);
+    } else {
+      setTimeout(() => {
+        index = 0;
+        contentEl.textContent = '';
+        current = (current + 1) % paragraphs.length;
+        typeChar();
+      }, 5000);
+    }
+  }
+
+  function triggerTypingOnceVisible() {
+    const box = document.getElementById("typingBox");
+    if (box && box.getBoundingClientRect().top < window.innerHeight) {
+      window.removeEventListener("scroll", triggerTypingOnceVisible);
+      typeChar();
+    }
+  }
+
+  window.addEventListener("scroll", triggerTypingOnceVisible);
+  return () => window.removeEventListener("scroll", triggerTypingOnceVisible);
+}, []);
+
   return (
     <div className={styles.app}>
       {/* Top Bar */}
@@ -50,7 +93,6 @@ export default function Landing() {
             alt="Jack Rabbit Logo"
             className={styles.topBarLogo}
           />
-          <button className={styles.buyButton}>Buy $Jack</button>
         </div>
         <div className={styles.itemRight}>
           <button
@@ -63,26 +105,39 @@ export default function Landing() {
 
       {/* Main Mascot */}
       <div className={styles.mainSection}>
-        <div className={styles.images}>
-          <img
-            src={catchme}
-            alt="JackRabbit slogan"
-            className={styles.catchmeImg}
-          />
-          <div className={styles.mascotWrapper}>
-            <img
-              src={jackrabbit}
-              alt="JackRabbit Mascot"
-              className={styles.mascotImg}
-            />
-            <img
-              src={sack}
-              alt="Whitepaper Sacks"
-              className={styles.sacksImg}
-            />
-          </div>
-        </div>
-      </div>
+  <div className={styles.images}>
+    <img
+      src={catchme}
+      alt="JackRabbit slogan"
+      className={styles.catchmeImg}
+    />
+
+    <div className={styles.mascotWrapper}>
+      <img
+        src={jacklaughing}
+        alt="JackRabbit gif"
+        className={styles.mascotImg}
+      />
+    </div>
+  </div>
+
+  <div className={styles.contractSection}>
+    <label className={styles.contractLabel}>Contract address</label>
+
+    <div className={styles.contractInputWrapper}>
+      <input
+        type="text"
+        readOnly
+        value="0xE004a1987fB0CAFAD49aA5180cbBb50c92e8C031"
+        className={styles.contractInput}
+      />
+      <button className={styles.contractCopy}>📋</button>
+    </div>
+
+    <button className={styles.buyBtn}>Buy $Jack</button>
+  </div>
+</div>
+
 
       {/* Animated Jack Banners */}
       <div className={`${styles.jackBanner} ${styles.leftBanner}`}>
@@ -106,18 +161,27 @@ export default function Landing() {
 
       {/* Holder Message Section */}
       <div className={styles.holderMessage}>
-        <div className={styles.headline}>Built for the Ones</div>
-        <div className={styles.subhead}>Who Stayed</div>
-        <div className={styles.holderBox}>
-          <p>
-            "Sometimes the loudest strength is quiet conviction. $JACK isn’t
-            just a deflationary reward meme token — it’s a tip of the hat to
-            those who didn’t sell, didn’t flinch, and didn’t forget what
-            PulseChain and the pDAI ecosystem were meant to be. No promises,
-            just proof."
-          </p>
-        </div>
-      </div>
+  <div className={styles.holderLeft}>
+    <div className={styles.headline}>Built for the Ones</div>
+    <div className={styles.subhead}>Who Stayed</div>
+    <div className={styles.holderBox}>
+      <p>
+        "Sometimes the loudest strength is quiet conviction. $JACK isn’t
+        just a deflationary reward meme token — it’s a tip of the hat to
+        those who didn’t sell, didn’t flinch, and didn’t forget what
+        PulseChain and the pDAI ecosystem were meant to be. No promises,
+        just proof."
+      </p>
+    </div>
+  </div>
+
+  <img
+    src={require('../assets/sack.png')}
+    alt="Whitepaper sack"
+    className={styles.sackImg}
+  />
+</div>
+
 
       {/* How Jack Runs Heading */}
       <div className={styles.howJackRuns}>
@@ -149,9 +213,8 @@ export default function Landing() {
             className={`${styles.stack} ${styles.firstYellowStack}`}
           />
           <p className={styles.firstCardParagraph}>
-            Stake 🪙 RH tokens, pDAI and Atropa to earn $Jack for free
-            continuously!!!
-            <br /> 5% fee 💸 on every stake
+            💥 Don’t let your tokens sit still — stake the ones you already hold 🪙 and earn JACK every day.
+            Your portfolio, now working for you.
           </p>
         </div>
         <div className={`${styles.card} ${styles.secondCard}`}>
@@ -162,9 +225,8 @@ export default function Landing() {
             className={`${styles.stack} ${styles.secondWhiteStack}`}
           />
           <p className={styles.secondCardParagraph}>
-            Stake 🪙 Jack to earn RH tokens, pDAI and Atropa for free
-            continuously!!!
-            <br /> 5% fee 💸 on every stake
+            🤝 Pair JACK with tokens you believe in or stake your LP to earn more JACK passively.
+            The stronger your bond, the greater your share.
           </p>
         </div>
         <div className={`${styles.card} ${styles.thirdCard}`}>
@@ -173,8 +235,8 @@ export default function Landing() {
           />
           <div className={`${styles.stack} ${styles.thirdRedStack}`} />
           <p className={styles.thirdCardParagraph}>
-            Bond 🤝 (LP) Jack with pDAI, Atropa or any token of your choice
-            to earn fees 💸 !!!
+            🧠 JACK a growing ecosystem fueled by community action.
+            Stay plugged in through our socials to catch every new feature and utility as it drops.
           </p>
         </div>
       </div>
@@ -184,22 +246,9 @@ export default function Landing() {
         <div className={styles.whoStayedTitle}>
           THE LEGEND OF JACK RABBIT
         </div>
-        <div className={styles.whoStayedBox}>
-          <p>
-            In a world of rug pulls, FUD storms, and depegged dreams, one
-            rabbit stood tall — not with hype, but with conviction. While
-            others panicked, Jack Rabbit held firm, sunglasses on, vibes
-            unshaken. He didn’t sell. He didn’t flee. He just watched the
-            chaos with quiet strength — and now, from that unwavering loyalty,
-            $JACK was born. A deflationary reward meme token built not just
-            to pump, but to honor those who stayed. The ones who believed in
-            PulseChain when it was unpopular. The ones who knew pDAI would
-            rise again. This isn’t just a meme — it’s a thank you. Stake RH
-            tokens, pDAI or Atropa to earn $JACK. Stake JACK to earn those
-            same assets back. Bond JACK with anything you love and earn
-            fees. Every action feeds the system — and every 5% fee fuels the
-            community. It’s a flywheel of value wrapped in meme energy. No
-            more promises — just proof. We loop. We pump. We meme. We win.
+        <div className={styles.whoStayedBox} id="typingBox">
+          <p id="typedText" className={styles.typingText}>
+            <span id="typedContent"></span><span className={styles.cursor}>|</span>
           </p>
         </div>
       </div>
@@ -269,3 +318,4 @@ export default function Landing() {
     </div>
   );
 }
+
