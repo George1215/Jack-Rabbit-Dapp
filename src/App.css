@@ -1,38 +1,98 @@
-.App {
-  text-align: center;
+/* src/App.css */
+
+/* ============================================================
+   GLOBAL RESET
+   Applies once for the whole app
+   ============================================================ */
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  box-sizing: border-box;
+
+  background: linear-gradient(to bottom, #ffb049 0%, #ff9240 100%);
 }
 
-.App-logo {
-  height: 40vmin;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   GLOBAL PAGE TRANSITIONS
+   Smooth fade out before route changes + fade in after
+   Used by App.js page-transition-shell
+   ============================================================ */
+
+.page-transition-shell {
+  min-height: 100vh;
+  width: 100%;
+
+  will-change: opacity, transform, filter;
+}
+
+.page-transition-shell.fadeIn {
+  animation: pageFadeIn 360ms cubic-bezier(0.18, 0.9, 0.22, 1) both;
+}
+
+.page-transition-shell.fadeOut {
+  animation: pageFadeOut 260ms cubic-bezier(0.45, 0, 0.35, 1) both;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.992);
+    filter: blur(5px);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.001);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes pageFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
-  to {
-    transform: rotate(360deg);
+
+  100% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.992);
+    filter: blur(5px);
+  }
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   Disable animations for users who prefer reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition-shell.fadeIn,
+  .page-transition-shell.fadeOut {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }

@@ -1,95 +1,377 @@
-.floatingTabs {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.tabIcon {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.floatUp {
-  animation: floatUp 3s ease-in-out infinite;
-}
-.floatDown {
-  animation: floatDown 4s ease-in-out infinite;
-}
-
-.activeGlow {
-  filter: drop-shadow(0 0 10px gold);
-  animation: glowPulse 1.5s infinite alternate;
-}
-
-@keyframes floatUp {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-@keyframes floatDown {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
-}
-@keyframes glowPulse {
-  from { filter: drop-shadow(0 0 4px gold); }
-  to { filter: drop-shadow(0 0 12px gold); }
-}
-
-.fadeOut {
-  animation: fadeOut 0.4s ease-in;
-}
-.fadeIn {
-  animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-
 /* src/styles/FloatingTabs.module.css */
-.tabWrapper {
-  position: fixed;
-  top: 4%;
-  right: 17%; /* adjust if needed based on Connect button */
+
+/* =========================================================
+   FLOATING SUB TABS
+   Shared style for Stake, Mining, NFT Bonds, and Treasury
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@500;600;700;800;900&display=swap");
+
+.treasuryStrip {
+  width: 100%;
+  min-height: 52px;
+
   display: flex;
-  gap: 14px;
-  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 12px;
+  box-sizing: border-box;
+
+  position: relative;
+  z-index: 80;
+
+  background: linear-gradient(180deg, #b9652c 0%, #a95725 100%);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+    0 3px 0 rgba(63, 28, 8, 0.14);
+
+  pointer-events: none;
 }
 
-.tabIcon {
+/* =========================================================
+   TAB ROW
+   ========================================================= */
+
+.treasuryTabsRow {
+  --tab-count: 2;
+  --indicator-index: 0;
+  --indicator-gradient: linear-gradient(130deg, #ffe45c, #ff8c22);
+
+  position: relative;
+
+  width: min(720px, 100%);
+  height: 52px;
+
+  display: grid;
+  grid-template-columns: repeat(var(--tab-count), minmax(120px, 1fr));
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: auto;
+}
+
+.stakeTabsRow {
+  width: min(560px, 100%);
+}
+
+/* =========================================================
+   NORMAL TABS
+   ========================================================= */
+
+.treasuryTab {
+  position: relative;
+
+  height: 52px;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 18px;
+
+  color: rgba(255, 247, 226, 0.66);
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+
+  font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.035em;
+
+  transition:
+    color 0.18s ease,
+    text-shadow 0.18s ease,
+    transform 0.18s ease;
+
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.32),
+    0 2px 6px rgba(0, 0, 0, 0.18);
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.treasuryTab:hover {
+  color: rgba(255, 255, 255, 0.94);
+  transform: translateY(-1px);
+}
+
+.treasuryTabActive {
+  color: #ffffff;
+  font-weight: 900;
+
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.34),
+    0 0 10px rgba(255, 209, 102, 0.28);
+}
+
+/* =========================================================
+   ACTIVE INDICATOR
+   ========================================================= */
+
+.tabIndicator {
+  position: absolute;
+
+  left: calc(
+    ((100% / var(--tab-count)) * var(--indicator-index)) +
+    ((100% / var(--tab-count)) / 2) -
+    15px
+  );
+
+  bottom: 8px;
+
   width: 30px;
-  height: 30px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  height: 4px;
+
+  border-radius: 999px;
+
+  background: var(--indicator-gradient);
+
+  transition:
+    left 0.2s ease,
+    background 0.2s ease;
+
+  pointer-events: none;
+
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.25),
+    0 0 8px rgba(255, 209, 102, 0.28);
 }
 
-.tabIcon:hover {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 4px white);
-  opacity: 0.8;
+/* =========================================================
+   PAGE-SPECIFIC STRIPS
+   ========================================================= */
+
+.stakeStrip,
+.miningStrip,
+.treasuryPageStrip {
+  background: linear-gradient(180deg, #b9652c 0%, #a95725 100%);
 }
 
-.activeTab {
-  animation: glowPulse 1.5s infinite;
+/* =========================================================
+   NFT PAGE TITLE TABS
+   Clean Mint + Bonds text titles
+   ========================================================= */
+
+.nftStrip {
+  min-height: 64px;
+  padding: 8px 14px;
+
+  background:
+    radial-gradient(circle at 12% 50%, rgba(255, 208, 78, 0.1), transparent 18%),
+    radial-gradient(circle at 88% 35%, rgba(255, 208, 78, 0.1), transparent 18%),
+    linear-gradient(180deg, #b9652c 0%, #a95725 100%);
 }
 
-@keyframes glowPulse {
-  0%, 100% {
-    filter: drop-shadow(0 0 4px gold);
+.nftTitleTabsRow {
+  width: min(520px, 100%);
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 72px;
+
+  pointer-events: auto;
+}
+
+.nftTitleTab {
+  position: relative;
+
+  min-width: 110px;
+  min-height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 248, 232, 0.68);
+  text-decoration: none;
+  text-align: center;
+
+  font-family: "Luckiest Guy", cursive;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.28),
+    0 0 10px rgba(255, 209, 102, 0.12);
+
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease,
+    text-shadow 0.18s ease;
+}
+
+.nftTitleTab:hover {
+  color: rgba(255, 255, 255, 0.92);
+  transform: translateY(-1px);
+}
+
+.nftTitleTab::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+
+  width: 44px;
+  height: 4px;
+
+  transform: translateX(-50%) scaleX(0);
+
+  border-radius: 999px;
+
+  background: linear-gradient(90deg, #ffe45c, #ff9b2d);
+
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.22),
+    0 0 8px rgba(255, 209, 102, 0.24);
+
+  transition: transform 0.18s ease;
+}
+
+.nftTitleTabActive {
+  color: #fff8e8;
+
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.34),
+    0 0 10px rgba(255, 209, 102, 0.22);
+}
+
+.nftTitleTabActive::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .treasuryStrip {
+    min-height: 50px;
+    padding: 0 8px;
   }
-  50% {
-    filter: drop-shadow(0 0 12px gold);
+
+  .treasuryTabsRow {
+    height: 50px;
+    width: 100%;
+  }
+
+  .stakeTabsRow {
+    width: min(520px, 100%);
+  }
+
+  .treasuryTab {
+    height: 50px;
+    padding: 0 12px;
+    font-size: 0.78rem;
+  }
+
+  .nftStrip {
+    min-height: 58px;
+    padding: 7px 10px;
+  }
+
+  .nftTitleTabsRow {
+    min-height: 44px;
+    gap: 48px;
+  }
+
+  .nftTitleTab {
+    min-width: 92px;
+    font-size: 0.95rem;
   }
 }
 
+@media (max-width: 560px) {
+  .treasuryStrip {
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
 
+  .treasuryStrip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .treasuryTabsRow {
+    width: max-content;
+    min-width: max-content;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .treasuryTab {
+    min-width: 118px;
+    padding: 0 12px;
+    font-size: 0.74rem;
+  }
+
+  .tabIndicator {
+    left: calc((118px * var(--indicator-index)) + 59px - 13px);
+    width: 26px;
+  }
+
+  .nftTitleTabsRow {
+    width: 100%;
+    min-width: 100%;
+    justify-content: center;
+    gap: 34px;
+  }
+
+  .nftTitleTab {
+    min-width: 82px;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .treasuryTab {
+    min-width: 108px;
+    font-size: 0.7rem;
+    padding: 0 10px;
+  }
+
+  .tabIndicator {
+    left: calc((108px * var(--indicator-index)) + 54px - 13px);
+    width: 26px;
+  }
+
+  .nftTitleTabsRow {
+    gap: 24px;
+  }
+
+  .nftTitleTab {
+    min-width: 72px;
+    font-size: 0.8rem;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .treasuryTab,
+  .tabIndicator,
+  .nftTitleTab,
+  .nftTitleTab::after {
+    transition: none !important;
+  }
+
+  .treasuryTab:hover,
+  .nftTitleTab:hover {
+    transform: none;
+  }
+}

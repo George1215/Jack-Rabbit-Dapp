@@ -1,0 +1,1236 @@
+/* src/styles/WeekClaims.module.css */
+
+/* =========================================================
+   PAGE RESET FOR THIS SCREEN ONLY
+   ========================================================= */
+
+:global(html.weekClaimsBgActive),
+:global(html.weekClaimsBgActive body),
+:global(html.weekClaimsBgActive #root) {
+  min-height: 100%;
+  background: transparent !important;
+}
+
+:global(html.weekClaimsBgActive #root > div) {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* =========================================================
+   MAIN PAGE BACKGROUND
+   ========================================================= */
+
+.weekClaimsPage {
+  width: 100%;
+  min-height: calc(100vh - 140px);
+  padding: 6px 12px 18px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  background-image:
+    linear-gradient(
+      rgba(9, 5, 2, 0.12),
+      rgba(9, 5, 2, 0.12)
+    ),
+    var(--week-claims-bg);
+
+  background-size:
+    auto,
+    cover;
+
+  background-position:
+    center top,
+    center top;
+
+  background-repeat:
+    no-repeat,
+    no-repeat;
+
+  background-attachment:
+    scroll,
+    scroll;
+}
+
+/* =========================================================
+   MAIN WRAPPER
+   ========================================================= */
+
+.claimsShell {
+  width: min(1220px, calc(100% - 8px));
+  margin: 0 auto;
+  position: relative;
+  zoom: 0.8;
+}
+
+/* =========================================================
+   TOP IMAGE BANNER
+   ========================================================= */
+
+.topTitle {
+  width: 45%;
+  height: auto;
+  margin: 0 auto -20px;
+  position: relative;
+  z-index: 7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.titleBannerImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  filter:
+    drop-shadow(0 6px 0 rgba(32, 10, 2, 0.42))
+    drop-shadow(0 10px 12px rgba(20, 7, 2, 0.26));
+}
+
+/* =========================================================
+   MAIN BOARD
+   ========================================================= */
+
+.board {
+  position: relative;
+  border-radius: 22px;
+  border: 4px solid #2d1004;
+  padding: 30px 10px 10px;
+  overflow: visible;
+
+  background:
+    radial-gradient(circle at 10% 10%, rgba(111, 198, 35, 0.16), transparent 24%),
+    radial-gradient(circle at 92% 12%, rgba(255, 158, 31, 0.18), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.06)),
+    #fff2c8;
+
+  box-shadow:
+    0 6px 0 rgba(35, 13, 4, 0.5),
+    inset 0 0 0 3px rgba(178, 101, 39, 0.18);
+}
+
+.board::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 18px;
+  border: 2px solid rgba(120, 67, 20, 0.18);
+  pointer-events: none;
+}
+
+/* =========================================================
+   TWO PANEL LAYOUT
+   ========================================================= */
+
+.claimsLayout {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+  align-items: stretch;
+  overflow: visible;
+}
+
+/* =========================================================
+   FIXED PANEL HEIGHT
+   Does not change if there are 0, 4, 10, or 15 miners.
+   ========================================================= */
+
+.panel {
+  position: relative;
+  height: 680px;
+  min-height: 680px;
+  max-height: 680px;
+  border-radius: 19px;
+  padding: 50px 18px 14px;
+  overflow: hidden;
+  isolation: isolate;
+
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.1),
+    0 4px 0 rgba(35, 13, 4, 0.18);
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 15px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* =========================================================
+   LIVE PANEL
+   ========================================================= */
+
+.livePanel {
+  border: 3px solid #2e7610;
+  background:
+    radial-gradient(circle at 18% 11%, rgba(255, 255, 255, 0.22), transparent 20%),
+    linear-gradient(180deg, #96ca3b 0%, #5fa41c 8.8%, #fff7d7 9%, #fff2c8 100%);
+}
+
+.livePanel::before {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(198, 255, 78, 0.32), transparent 17%),
+    radial-gradient(circle at 82% 15%, rgba(45, 125, 12, 0.18), transparent 20%),
+    radial-gradient(circle at 50% 85%, rgba(89, 157, 25, 0.16), transparent 28%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.045) 0 2px,
+      transparent 2px 20px
+    ),
+    linear-gradient(180deg, #85c92d 0%, #4a9816 38%, #2f760b 100%);
+}
+
+.livePanel::after {
+  border: 2px solid rgba(236, 255, 158, 0.22);
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 255, 255, 0.14), transparent 12%),
+    radial-gradient(circle at 88% 15%, rgba(255, 255, 255, 0.1), transparent 10%),
+    radial-gradient(circle at 18% 78%, rgba(19, 84, 9, 0.1), transparent 19%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 34%, rgba(0, 0, 0, 0.04));
+
+  box-shadow:
+    inset 0 0 0 2px rgba(34, 103, 10, 0.16),
+    inset 0 0 22px rgba(16, 75, 7, 0.22);
+}
+
+/* =========================================================
+   CLAIM PANEL
+   ========================================================= */
+
+.claimPanel {
+  border: 3px solid #bd5707;
+  background:
+    radial-gradient(circle at 85% 9%, rgba(255, 255, 255, 0.22), transparent 22%),
+    linear-gradient(180deg, #ffaf2f 0%, #ef7411 8.8%, #fff4cf 9%, #fff0c4 100%);
+}
+
+.claimPanel::before {
+  background:
+    radial-gradient(circle at 17% 17%, rgba(255, 230, 99, 0.36), transparent 18%),
+    radial-gradient(circle at 84% 20%, rgba(255, 255, 255, 0.18), transparent 17%),
+    radial-gradient(circle at 50% 85%, rgba(185, 76, 4, 0.18), transparent 30%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.055) 0 2px,
+      transparent 2px 22px
+    ),
+    linear-gradient(180deg, #ffc13c 0%, #f1890d 42%, #c55206 100%);
+}
+
+.claimPanel::after {
+  border: 2px solid rgba(255, 246, 177, 0.24);
+  background:
+    radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.14), transparent 11%),
+    radial-gradient(circle at 90% 18%, rgba(255, 255, 255, 0.1), transparent 12%),
+    radial-gradient(circle at 70% 80%, rgba(120, 43, 4, 0.1), transparent 22%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 38%, rgba(0, 0, 0, 0.04));
+
+  box-shadow:
+    inset 0 0 0 2px rgba(142, 55, 5, 0.14),
+    inset 0 0 24px rgba(122, 44, 4, 0.18);
+}
+
+/* =========================================================
+   PANEL DECORATION
+   ========================================================= */
+
+.panelDecor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.panelDecor::before,
+.panelDecor::after {
+  position: absolute;
+  font-size: 3.5rem;
+  opacity: 0.065;
+  filter: blur(0.1px);
+}
+
+.livePanel .panelDecor::before {
+  content: "🍃";
+  left: 14px;
+  top: 60px;
+  transform: rotate(-22deg);
+}
+
+.livePanel .panelDecor::after {
+  content: "🥕";
+  right: 18px;
+  bottom: 22px;
+  transform: rotate(22deg);
+}
+
+.claimPanel .panelDecor::before {
+  content: "👑";
+  left: 14px;
+  top: 60px;
+  transform: rotate(-16deg);
+}
+
+.claimPanel .panelDecor::after {
+  content: "🪙";
+  right: 18px;
+  bottom: 22px;
+  transform: rotate(16deg);
+}
+
+/* =========================================================
+   PANEL CONTENT
+   ========================================================= */
+
+.panelContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================================
+   PANEL RIBBON IMAGES
+   ========================================================= */
+
+.panelRibbon {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.liveRibbon {
+  width: min(82%, 430px);
+}
+
+.claimRibbon {
+  width: min(84%, 450px);
+}
+
+.panelRibbonImg {
+  display: block;
+  width: 100%;
+  max-height: 60px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  filter:
+    drop-shadow(0 3px 0 rgba(32, 10, 2, 0.24))
+    drop-shadow(0 6px 7px rgba(20, 7, 2, 0.16));
+}
+
+/* =========================================================
+   MINER LIST AREA
+   Only this part scrolls.
+   ========================================================= */
+
+.minerListArea {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+  margin-right: -4px;
+  padding-bottom: 4px;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(114, 63, 9, 0.45) rgba(255, 247, 210, 0.2);
+}
+
+.minerListArea::-webkit-scrollbar {
+  width: 7px;
+}
+
+.minerListArea::-webkit-scrollbar-track {
+  background: rgba(255, 247, 210, 0.18);
+  border-radius: 999px;
+}
+
+.minerListArea::-webkit-scrollbar-thumb {
+  background: rgba(114, 63, 9, 0.42);
+  border-radius: 999px;
+}
+
+/* =========================================================
+   MINER CARDS
+   ========================================================= */
+
+.minerStack {
+  display: grid;
+  gap: 7px;
+}
+
+.minerCard {
+  position: relative;
+  min-height: 88px;
+  border-radius: 16px;
+  border: 3px solid transparent;
+  padding: 9px 11px 8px;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at 92% 18%, rgba(255, 255, 255, 0.62), transparent 24%) padding-box,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 218, 0.99)) padding-box,
+    linear-gradient(
+      180deg,
+      #fff6c7 0%,
+      #e2a54d 18%,
+      #b96912 42%,
+      #ffe39b 63%,
+      #d18a2c 82%,
+      #8f4a08 100%
+    ) border-box;
+
+  box-shadow:
+    0 2px 0 rgba(95, 46, 8, 0.18),
+    0 4px 8px rgba(55, 22, 4, 0.07),
+    inset 0 0 0 2px rgba(255, 252, 225, 0.7),
+    inset 0 0 0 4px rgba(226, 169, 76, 0.15),
+    inset 0 -4px 8px rgba(171, 91, 11, 0.07),
+    inset 0 4px 6px rgba(255, 255, 255, 0.36);
+}
+
+.livePanel .minerCard {
+  background:
+    radial-gradient(circle at 92% 18%, rgba(255, 255, 255, 0.62), transparent 24%) padding-box,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 250, 222, 0.99)) padding-box,
+    linear-gradient(
+      180deg,
+      #ffffcf 0%,
+      #e1b558 16%,
+      #9b761b 39%,
+      #fff0a6 62%,
+      #d4a23a 82%,
+      #7b5a0d 100%
+    ) border-box;
+}
+
+.claimPanel .minerCard {
+  min-height: 88px;
+  background:
+    radial-gradient(circle at 92% 18%, rgba(255, 255, 255, 0.62), transparent 24%) padding-box,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 247, 215, 0.99)) padding-box,
+    linear-gradient(
+      180deg,
+      #fff0bd 0%,
+      #f2ba57 16%,
+      #c76b11 39%,
+      #ffe19a 62%,
+      #ed9e2e 82%,
+      #9a4706 100%
+    ) border-box;
+}
+
+.minerCard::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  z-index: 1;
+  border-radius: 12px;
+  border: 1.4px solid rgba(165, 105, 30, 0.32);
+  pointer-events: none;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.68),
+    inset 0 0 8px rgba(225, 160, 55, 0.1);
+}
+
+.minerCard::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 6px;
+  height: 10px;
+  z-index: 1;
+  border-radius: 999px;
+  opacity: 0.68;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.42),
+    rgba(255, 255, 255, 0.04)
+  );
+}
+
+.livePanel .minerCard::before {
+  border-color: rgba(120, 150, 35, 0.36);
+}
+
+.claimPanel .minerCard::before {
+  border-color: rgba(196, 105, 22, 0.36);
+}
+
+/* =========================================================
+   CARD CORNER DECORATIONS
+   ========================================================= */
+
+.cardCornerOrnament {
+  position: absolute;
+  object-fit: contain;
+  object-position: center;
+  z-index: 4;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cornerLeaf,
+.livePanel .cornerWheat {
+  width: 34px;
+  height: 34px;
+  filter:
+    drop-shadow(0 1px 0 rgba(44, 75, 4, 0.18))
+    drop-shadow(0 3px 5px rgba(44, 75, 4, 0.14));
+}
+
+.cornerWheat,
+.claimPanel .cornerLeaf {
+  width: 40px;
+  height: 40px;
+  filter:
+    drop-shadow(0 1px 0 rgba(127, 72, 2, 0.16))
+    drop-shadow(0 3px 5px rgba(127, 72, 2, 0.16));
+}
+
+.livePanel .cornerWheat {
+  content: url("../assets/leaf_corner.png");
+}
+
+.claimPanel .cornerLeaf {
+  content: url("../assets/golden_wheat_corner.png");
+}
+
+.livePanel .leafTopLeft {
+  top: -6px;
+  left: -6px;
+  transform: rotate(-20deg);
+}
+
+.livePanel .leafBottomLeft {
+  bottom: -6px;
+  left: -6px;
+  transform: scaleY(-1) rotate(-20deg);
+}
+
+.livePanel .wheatTopRight {
+  top: -6px;
+  right: -6px;
+  transform: scaleX(-1) rotate(-20deg);
+}
+
+.livePanel .wheatBottomRight {
+  bottom: -6px;
+  right: -6px;
+  transform: scale(-1, -1) rotate(-20deg);
+}
+
+.claimPanel .leafTopLeft {
+  top: -7px;
+  left: -7px;
+  transform: rotate(135deg);
+}
+
+.claimPanel .leafBottomLeft {
+  bottom: -7px;
+  left: -7px;
+  transform: scaleY(-1) rotate(135deg);
+}
+
+.claimPanel .wheatTopRight {
+  top: -7px;
+  right: -7px;
+  transform: scaleX(-1) rotate(135deg);
+}
+
+.claimPanel .wheatBottomRight {
+  bottom: -7px;
+  right: -7px;
+  transform: scale(-1, -1) rotate(135deg);
+}
+
+/* =========================================================
+   CARD TEXT + ROW LAYOUTS
+   ========================================================= */
+
+.cardTop,
+.liveMinerLayout,
+.claimMinerLayout,
+.totalRow,
+.pager {
+  position: relative;
+  z-index: 2;
+}
+
+.cardTop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.minerName {
+  margin: 0;
+  color: #261105;
+  font-family: "Baloo 2", "Fredoka", Georgia, serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+  line-height: 1;
+  font-weight: 950;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+  white-space: nowrap;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  min-height: 24px;
+  padding: 3px 8px;
+  border-radius: 7px;
+  border: 2px solid #1c5d07;
+
+  background: linear-gradient(180deg, #63bd27, #207b0a);
+  color: #fffce7;
+
+  font-family: "Luckiest Guy", "Bangers", "Baloo 2", "Fredoka", cursive, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.25),
+    0 2px 0 rgba(18, 63, 4, 0.2);
+
+  box-shadow:
+    0 2px 0 rgba(35, 92, 8, 0.24),
+    inset 0 2px 0 rgba(255, 255, 255, 0.22);
+}
+
+.liveMinerLayout,
+.claimMinerLayout {
+  display: grid;
+  gap: 5px;
+}
+
+.liveTopRow,
+.claimTopRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  align-items: start;
+}
+
+.liveRowDivider,
+.claimRowDivider {
+  height: 0;
+  border-top: 1.4px dashed rgba(204, 135, 35, 0.55);
+}
+
+.liveBottomRow,
+.claimBottomRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  align-items: start;
+}
+
+.liveBottomRow .dataItem,
+.claimBottomRow .dataItem {
+  min-width: 0;
+  padding: 0 7px;
+  border-left: 1.4px solid rgba(205, 139, 45, 0.35);
+}
+
+.liveBottomRow .dataItem:first-child,
+.claimBottomRow .dataItem:first-child,
+.liveTopRow .dataItem:first-child,
+.claimTopRow .dataItem:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.liveBottomRow .dataItem:last-child,
+.claimBottomRow .dataItem:last-child {
+  padding-right: 0;
+}
+
+.dataItem {
+  min-width: 0;
+  padding-left: 6px;
+  border-left: 1.4px solid rgba(205, 139, 45, 0.35);
+}
+
+.label {
+  display: block;
+  margin-bottom: 2px;
+  color: #6a3311;
+  font-family: "Baloo 2", "Fredoka", system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  white-space: nowrap;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #160b04;
+  font-family: "Baloo 2", "Fredoka", system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.liveBottomRow .value,
+.claimBottomRow .value {
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+/* =========================================================
+   FIELD ICONS
+   ========================================================= */
+
+.modeIconImage,
+.calendarIconImage,
+.jackTokenIconImage,
+.clockIconImage,
+.pointStarIcon {
+  object-fit: contain;
+  object-position: center;
+  display: inline-block;
+  flex: 0 0 auto;
+  transform: translateY(-1px);
+}
+
+.modeIconImage,
+.calendarIconImage {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+}
+
+.jackTokenIconImage,
+.clockIconImage,
+.pointStarIcon {
+  width: 19px;
+  height: 19px;
+  min-width: 19px;
+}
+
+/* =========================================================
+   CLAIM BUTTON
+   ========================================================= */
+
+.claimBtn {
+  width: 72px;
+  min-height: 31px;
+  justify-self: end;
+  align-self: center;
+  border-radius: 9px;
+  border: 2px solid #9e3905;
+  cursor: pointer;
+
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.34), transparent 18%),
+    linear-gradient(180deg, #ffc33d, #ff8d0b 58%, #db5c06);
+
+  color: #fff6d2;
+  font-family: "Luckiest Guy", "Bangers", "Baloo 2", "Fredoka", cursive, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 1px 0 rgba(122, 44, 4, 0.72),
+    0 3px 0 rgba(82, 28, 2, 0.22);
+
+  box-shadow:
+    0 2px 0 #9d3b05,
+    inset 0 2px 0 rgba(255, 255, 255, 0.28);
+}
+
+.claimBtn:hover {
+  transform: translateY(-1px);
+}
+
+.claimBtn:active {
+  transform: translateY(2px);
+}
+
+/* =========================================================
+   CARTOON PAGINATION
+   ========================================================= */
+
+.pager {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: auto;
+  margin-bottom: 6px;
+  padding: 4px 0;
+}
+
+.pageBtn {
+  min-width: 78px;
+  min-height: 30px;
+  border-radius: 999px;
+  border: 2px solid rgba(70, 34, 5, 0.82);
+  cursor: pointer;
+  white-space: nowrap;
+
+  background:
+    radial-gradient(circle at 70% 18%, rgba(255, 255, 255, 0.32), transparent 20%),
+    linear-gradient(180deg, #fff086 0%, #ffb22d 45%, #e66c08 100%);
+
+  color: #fff8d7;
+  font-family: "Luckiest Guy", "Bangers", "Baloo 2", "Fredoka", cursive, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 1px 0 rgba(86, 31, 2, 0.75),
+    0 2px 0 rgba(86, 31, 2, 0.28);
+
+  box-shadow:
+    0 3px 0 rgba(107, 43, 4, 0.72),
+    inset 0 2px 0 rgba(255, 255, 255, 0.36),
+    inset 0 -3px 8px rgba(145, 47, 3, 0.18);
+}
+
+.pageBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.pageBtn:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+.pageBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+}
+
+.pageInfo {
+  min-width: 110px;
+  min-height: 28px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(100, 55, 10, 0.45);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  background:
+    linear-gradient(180deg, rgba(255, 252, 218, 0.86), rgba(255, 225, 127, 0.78));
+
+  color: #3d1905;
+  font-family: "Baloo 2", "Fredoka", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 2px 0 rgba(72, 31, 3, 0.18);
+}
+
+.pageGem {
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+/* =========================================================
+   TOTAL ROWS
+   ========================================================= */
+
+.totalRow {
+  flex: 0 0 auto;
+  min-height: 82px;
+  margin-top: 0;
+  border-radius: 17px;
+  border: 3px solid transparent;
+  padding: 7px 10px;
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  overflow: visible;
+  color: #351505;
+
+  background:
+    radial-gradient(circle at 86% 26%, rgba(255, 255, 255, 0.32), transparent 17%) padding-box,
+    linear-gradient(180deg, #ffb43c, #f18610 62%, #cf5d06 100%) padding-box,
+    linear-gradient(
+      180deg,
+      #fff0a8 0%,
+      #f6b53d 18%,
+      #b85004 42%,
+      #ffe092 62%,
+      #d76f09 82%,
+      #8f3602 100%
+    ) border-box;
+
+  box-shadow:
+    0 3px 0 rgba(103, 41, 4, 0.28),
+    inset 0 0 0 2px rgba(255, 238, 165, 0.46),
+    inset 0 5px 10px rgba(255, 255, 255, 0.18),
+    inset 0 -6px 10px rgba(132, 43, 3, 0.16);
+}
+
+.livePanel .totalRow {
+  background:
+    radial-gradient(circle at 86% 26%, rgba(255, 255, 255, 0.24), transparent 17%) padding-box,
+    linear-gradient(180deg, #8ad03a, #55a617 62%, #2f7c0c 100%) padding-box,
+    linear-gradient(
+      180deg,
+      #f0ffd0 0%,
+      #b6df61 18%,
+      #458c14 42%,
+      #e1ff9d 62%,
+      #72b728 82%,
+      #245f09 100%
+    ) border-box;
+}
+
+.claimTotalRow {
+  grid-template-columns: 100px minmax(0, 1fr) 118px;
+}
+
+.totalSackImage {
+  width: 108px;
+  height: 88px;
+  object-fit: contain;
+  object-position: center;
+  justify-self: center;
+  align-self: center;
+  margin-left: -10px;
+  margin-top: -13px;
+  margin-bottom: -9px;
+  user-select: none;
+  pointer-events: none;
+
+  filter:
+    drop-shadow(0 4px 0 rgba(74, 28, 2, 0.2))
+    drop-shadow(0 6px 8px rgba(61, 22, 2, 0.14));
+}
+
+.liveTotalRow .totalSackImage {
+  width: 104px;
+  height: 84px;
+  margin-left: -10px;
+}
+
+.claimTotalRow .totalSackImage {
+  width: 112px;
+  height: 90px;
+}
+
+.totalCopy {
+  min-width: 0;
+}
+
+.totalCopy .small {
+  margin-bottom: 1px;
+  color: #351505;
+  font-family: "Baloo 2", "Fredoka", system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.livePanel .totalCopy .small,
+.livePanel .totalCopy .big {
+  color: #132d06;
+}
+
+.totalCopy .big {
+  color: #2b1206;
+  font-family: "Baloo 2", "Fredoka", system-ui, sans-serif;
+  font-size: clamp(1.75rem, 2.55vw, 2.38rem);
+  font-weight: 750;
+  line-height: 0.96;
+  white-space: nowrap;
+
+  text-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.24),
+    0 3px 0 rgba(117, 45, 4, 0.14);
+}
+
+.totalCopy .big span {
+  font-size: 0.48em;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* =========================================================
+   CLAIM ALL BUTTON
+   ========================================================= */
+
+.claimAllBtn {
+  width: 112px;
+  min-height: 48px;
+  justify-self: end;
+  align-self: center;
+  border-radius: 13px;
+  border: 3px solid #9e3905;
+  cursor: pointer;
+  white-space: nowrap;
+
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.36), transparent 18%),
+    linear-gradient(180deg, #ffd749 0%, #ff9c0b 58%, #dc5f05 100%);
+
+  color: #fff6d2;
+  font-family: "Luckiest Guy", "Bangers", "Baloo 2", "Fredoka", cursive, sans-serif;
+  font-size: 0.94rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 2px 0 rgba(122, 44, 4, 0.72),
+    0 3px 0 rgba(91, 31, 2, 0.24);
+
+  box-shadow:
+    0 4px 0 #9d3b05,
+    inset 0 2px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -4px 10px rgba(160, 51, 3, 0.18);
+}
+
+.claimAllBtn:hover {
+  transform: translateY(-1px);
+}
+
+.claimAllBtn:active {
+  transform: translateY(2px);
+}
+
+/* =========================================================
+   TABLET RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .claimsShell {
+    width: min(930px, calc(100% - 8px));
+    zoom: 0.8;
+  }
+
+  .claimsLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    height: 680px;
+    min-height: 680px;
+    max-height: 680px;
+  }
+
+  .liveRibbon,
+  .claimRibbon {
+    width: min(86%, 450px);
+  }
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .weekClaimsPage {
+    padding: 14px 10px 32px;
+    background-attachment: scroll;
+  }
+
+  .claimsShell {
+    width: 100%;
+    zoom: 1;
+  }
+
+  .topTitle {
+    width: min(100%, 640px);
+    height: 92px;
+    margin: 0 auto -8px;
+  }
+
+  .board {
+    padding: 34px 8px 10px;
+    border-radius: 20px;
+  }
+
+  .panel {
+    height: 720px;
+    min-height: 720px;
+    max-height: 720px;
+    padding: 56px 14px 14px;
+  }
+
+  .panelRibbon {
+    top: -22px;
+  }
+
+  .liveRibbon,
+  .claimRibbon {
+    width: min(94%, 390px);
+  }
+
+  .panelRibbonImg {
+    max-height: 58px;
+  }
+
+  .cornerLeaf,
+  .livePanel .cornerWheat {
+    width: 34px;
+    height: 34px;
+  }
+
+  .cornerWheat,
+  .claimPanel .cornerLeaf {
+    width: 38px;
+    height: 38px;
+  }
+
+  .liveTopRow,
+  .claimTopRow,
+  .liveBottomRow,
+  .claimBottomRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .modeIconImage,
+  .calendarIconImage {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+  }
+
+  .jackTokenIconImage,
+  .clockIconImage,
+  .pointStarIcon {
+    width: 19px;
+    height: 19px;
+    min-width: 19px;
+  }
+
+  .claimBtn {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 34px;
+  }
+
+  .pager {
+    gap: 7px;
+    padding: 8px 0 7px;
+  }
+
+  .pageBtn {
+    min-width: 72px;
+    min-height: 30px;
+    font-size: 0.7rem;
+  }
+
+  .pageInfo {
+    min-width: 96px;
+    font-size: 0.72rem;
+  }
+
+  .totalRow,
+  .claimTotalRow {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .totalSackImage,
+  .liveTotalRow .totalSackImage,
+  .claimTotalRow .totalSackImage {
+    width: 112px;
+    height: 92px;
+    margin: -14px auto -10px;
+  }
+
+  .claimAllBtn {
+    justify-self: center;
+    width: 100%;
+    min-height: 50px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .panel {
+    height: 760px;
+    min-height: 760px;
+    max-height: 760px;
+  }
+
+  .minerName {
+    font-size: 1rem;
+  }
+
+  .value {
+    font-size: 0.84rem;
+  }
+
+  .liveBottomRow .value,
+  .claimBottomRow .value {
+    font-size: 0.8rem;
+  }
+
+  .label {
+    font-size: 0.58rem;
+  }
+}
