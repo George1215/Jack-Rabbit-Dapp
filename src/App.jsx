@@ -1,128 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
+import Landing from './Landing';
+import rocket from './assets/Jackriding.png';
+import { modules, JACK, PDAI, CHART, EXPLORER } from './protocol';
+import { useWallet } from './hooks/useWallet';
+import { runnerBudget } from '../Jack-Rabbit-Contracts-main/economics/runner-budget.mjs';
 import './dapp.css';
-
-// Import your ABIs
-import JackStakeAbi from '../public/abis/JackStake.json';
-// import ERC20Abi from '../public/abis/IERC20.json'; // if needed
-
-// Token metadata
-const tokenInfo = {
-  "0x8a810ea8b121d08342e9e7696f4a9915cbe494b7": { symbol: "PLS",   icon: "/assets/pls.svg"   },
-  "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39": { symbol: "PLSX",  icon: "/assets/plsx.svg"  },
-  "0x6efafcb715f385c71d8af763e8478feea6fadf63": { symbol: "HEX",   icon: "/assets/hex.svg"   },
-  "0xa210f95d665bb4537434be96d9a2866cca629d5b": { symbol: "INC",   icon: "/assets/inc.svg"   },
-  "0x0154179238926e9d5ab4035803c2788457da3ae2": { symbol: "pDAI",  icon: "/assets/pdai.svg"  },
-  "0xe929f41b8092fe74811577a004c9700843e86ce1": { symbol: "Atropa",icon: "/assets/atropa.svg"},
-  "0xfaecd753896be6b9c946cef01ce2feffe4f3dd0f": { symbol: "Teddy", icon: "/assets/teddy.png" },
-  "0x1f75a0c8cea75420f56598d429e0d82a0961261e": { symbol: "Alien", icon: "/assets/alien.png" }
-};
-
+const navigation = [...modules, { id: 'runner', label: 'Runner' }, { id: 'treasury', label: 'Treasury' }];
+const readRoute = () => navigation.some(x => x.id === location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
+const short = address => `${address.slice(0, 6)}…${address.slice(-4)}`;
+const pls = amount => `${Number(BigInt(amount)) / 1e18}`;
+function Badge({ children }) { return <span className="badge">{children}</span>; }
+function SectionTitle({ eyebrow, title }) { return <div className="section-heading"><p className="eyebrow">{eyebrow}</p><h2>{title}</h2></div>; }
+function Metric({ label, value, note }) { return <div className="metric"><p>{label}</p><strong>{value}</strong><span>{note}</span></div>; }
 function App() {
-  // Wallet state
-  const [account, setAccount] = useState(null);
-  // Pools data
-  const [pools, setPools] = useState([]);
-  // Modal state
-  const [modalOpen, setModalOpen] = useState(false);
-  const [isStakeMode, setIsStakeMode] = useState(true);
-  // Current token selection in modal
-  const [selectedToken, setSelectedToken] = useState({ address: Object.keys(tokenInfo)[0], symbol: 'PLS', icon: '/assets/pls.svg' });
-
-  // Initialize provider & load pools
-  useEffect(() => {
-    if (!window.ethereum) return;
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const jackRead = new ethers.Contract(
-      '0x3d50A5EE9ef8C078A86a26161792da5D388A35Fa',
-      JackStakeAbi,
-      provider
-    );
-
-    async function load() {
-      // Load wallet
-      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-      setAccount(accounts[0] || null);
-      // Load stake config (stub: you'll implement like before)
-      // const data = await jackRead.getExternalPools();
-      // setPools(data);
-    }
-    load();
-    window.ethereum.on('accountsChanged', (acs) => setAccount(acs[0] || null));
-  }, []);
-
-  return (
-    <>
-      <header className="dapp-header">
-        <img src="/assets/jacklogo.png" alt="Logo" className="header-logo" />
-        <nav className="header-nav">
-          <img src="/assets/carrot.png" alt="Carrot" id="carrot-tab" className="nav-tab active" />
-          <img src="/assets/paw.png" alt="Paw" id="paw-tab" className="nav-tab" />
-          <button id="connect-btn" className="nav-btn">
-            {account ? `${account.slice(0,6)}…${account.slice(-4)}` : 'Connect wallet'}
-          </button>
-        </nav>
-      </header>
-
-      <main>
-        {/* Hero */}
-        <section className="hero">
-          <h1>Diamond Hands!!!</h1>
-          <p>Stake your favourite tokens to earn Jack in the pools below</p>
-        </section>
-
-        {/* Pools */}
-        <section className="pools">
-          <div className="pools-left-wrapper">
-            <div className="panel-tabs left-tabs">
-              <button className="tab stake" onClick={() => setIsStakeMode(true)}>Stake</button>
-              <button className="tab unstake" onClick={() => setIsStakeMode(false)}>Unstake</button>
-            </div>
-            <div className="panel left-panel">
-              <table className="data-table">
-                <thead>
-                  <tr>
-                    <th>Token</th>
-                    <th>Symbol</th>
-                    <th>APY</th>
-                    <th>Total Staked</th>
-                    <th></th>
-                    <th>Your Stake</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pools.map(pool => (
-                    <tr key={pool.token} onClick={() => { setSelectedToken({ address: pool.token, symbol: tokenInfo[pool.token].symbol, icon: tokenInfo[pool.token].icon }); setModalOpen(true); }}>
-                      <td><img src={tokenInfo[pool.token].icon} className="token-icon" /></td>
-                      <td>{tokenInfo[pool.token].symbol}</td>
-                      <td>{pool.apy.toFixed(2)}%</td>
-                      <td>{pool.total.toLocaleString()}</td>
-                      <td className="badge-cell">{pool.isTop && '🦄'}</td>
-                      <td>{pool.user.toLocaleString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Rewards side stub omitted for brevity */}
-        </section>
-
-        {/* Modal */}
-        {modalOpen && (
-          <div id="action-modal" className="modal">
-            <div className="modal-overlay" onClick={() => setModalOpen(false)} />
-            <div className="modal-panel panel">
-              <button className="modal-close" onClick={() => setModalOpen(false)}>&times;</button>
-              <h2 className="modal-title">{isStakeMode ? `Stake ${selectedToken.symbol}!!!` : `Unstake ${selectedToken.symbol}!!!`}</h2>
-              {/* Input row + search logic here... */}
-            </div>
-          </div>
-        )}
-      </main>
-    </>
-  );
+  const [route, setRoute] = useState(readRoute);
+  const wallet = useWallet();
+  useEffect(() => { const change = () => { setRoute(readRoute()); window.scrollTo(0, 0); }; window.addEventListener('hashchange', change); return () => window.removeEventListener('hashchange', change); }, []);
+  useEffect(() => { document.title = `${navigation.find(x => x.id === route)?.label ?? 'Home'} · Jack Rabbit`; }, [route]);
+  if (route === 'overview') return <Landing />;
+  return <><a className="skip-link" href="#main" onClick={e => { e.preventDefault(); document.getElementById('main').focus(); }}>Skip to content</a>
+    <header className="dapp-header"><a href="#overview" aria-label="Jack Rabbit home"><img src="/assets/jacklogo.png" alt="Jack Rabbit" className="header-logo" /></a><nav className="header-nav" aria-label="Staking navigation"><a href="#diamond" className={`icon-link ${route === 'diamond' ? 'active' : ''}`} aria-label="Diamond Hands" aria-current={route === 'diamond' ? 'page' : undefined}><img src="/assets/carrot.png" alt="" className="nav-tab" /></a><a href="#jackies" className={`icon-link ${route === 'jackies' ? 'active' : ''}`} aria-label="Jackies" aria-current={route === 'jackies' ? 'page' : undefined}><img src="/assets/paw.png" alt="" className="nav-tab" /></a><button className="nav-btn" disabled={wallet.busy} onClick={wallet.account && wallet.chain !== '0x171' ? wallet.switchNetwork : wallet.connect}>{wallet.busy ? 'Check wallet…' : wallet.account ? wallet.chain !== '0x171' ? 'Switch to PulseChain' : short(wallet.account) : 'Connect wallet'}</button></nav></header>
+    <nav className="module-nav" aria-label="All modules">{navigation.map(item => <a href={`#${item.id}`} key={item.id} aria-current={route === item.id ? 'page' : undefined}>{item.label}</a>)}</nav>
+    <main id="main" tabIndex={-1}>{wallet.message && <p className="wallet-message" role="status">{wallet.message}</p>}{wallet.account && wallet.chain !== '0x171' && <p className="wallet-message">Select PulseChain to read your JACK balance.</p>}{route === 'runner' ? <Runner /> : route === 'treasury' ? <Treasury wallet={wallet} /> : <OriginalModule key={route} module={modules.find(x => x.id === route)} />}</main>
+    <footer><a href={CHART} target="_blank" rel="noreferrer">JACK chart ↗</a><span>PulseChain · Module deployments awaiting verification</span><a href={`${EXPLORER}${JACK}`} target="_blank" rel="noreferrer">JACK contract ↗</a></footer></>;
 }
-
+function OriginalModule({ module }) {
+  const [mode, setMode] = useState('stake');
+  const jackies = module.id === 'jackies';
+  const diamond = module.id === 'diamond';
+  const title = diamond ? 'Diamond Hands!!!' : jackies ? 'Jackies!!!' : `${module.label}!!!`;
+  const subtitle = diamond ? 'Stake your favourite tokens to earn Jack in the pools below' : jackies ? 'Stake Jack to earn your favourite tokens' : module.blurb;
+  return <><section className="hero"><h1>{title}</h1><p>{subtitle}</p></section>
+    <section className={`pools original-pools ${jackies ? 'jackies-pools' : ''}`}><div className="pools-left-wrapper"><div className="panel-tabs left-tabs" role="group" aria-label="Position action"><button className="tab stake" aria-pressed={mode === 'stake'} onClick={() => setMode('stake')}>{jackies ? 'Stake Jack' : diamond ? 'Stake' : 'Explore'}</button><button className="tab unstake" aria-pressed={mode === 'unstake'} onClick={() => setMode('unstake')}>{jackies ? 'Unstake Jack' : diamond ? 'Unstake' : 'Your position'}</button></div>
+      <div className="panel left-panel"><div className="table-scroll"><table className="data-table"><thead><tr><th>Token</th><th>Symbol</th><th>{jackies ? 'Annual % Yield' : 'APY'}</th><th>{jackies ? 'Aggregate Pool Size' : 'Total Staked'}</th><th>{jackies ? 'Your Current Stake' : 'Your Stake'}</th></tr></thead><tbody>{jackies && <tr><td><img src="/assets/jacklogo.png" className="token-icon" alt="Jack" /></td><td>JACK</td><td>—</td><td>—</td><td>—</td></tr>}<tr><td colSpan="5" className="pool-empty"><strong>{mode === 'unstake' ? 'Positions awaiting verification' : 'Pools awaiting verification'}</strong><p>{module.requirement} must be confirmed before {mode === 'unstake' ? 'positions and withdrawals are shown' : 'participation opens'}.</p></td></tr></tbody></table></div><p className="panel-note">{module.note}</p></div>
+    </div><div className="pools-right-wrapper"><div className="panel-tabs right-tabs"><span className="tab rewards">Rewards</span></div><div className="panel right-panel">{jackies ? <div className="original-rewards"><img src="/assets/jacklogo.png" className="token-icon" alt="" /><strong>Token rewards</strong><span>—</span><button className="claim-btn" disabled>Claim</button></div> : <table className="rewards-table"><thead><tr><th colSpan="2">{diamond ? 'Jack tokens' : module.reward}</th></tr></thead><tbody><tr><td>—</td><td><button className="claim-btn" disabled>Claim</button></td></tr></tbody></table>}<p className="panel-note">Rewards will appear after deployment and funding are verified.</p></div></div></section>
+    <details className="module-details"><summary>How {module.label} works</summary><ol>{module.steps.map(step => <li key={step}>{step}</li>)}</ol><p>{module.source}.</p></details></>;
+}
+function Runner() {
+  const [gasPrice, setGasPrice] = useState('1');
+  const [updates, setUpdates] = useState('24');
+  let result;
+  const valid = /^\d+(\.\d{1,9})?$/.test(gasPrice) && Number(gasPrice) > 0 && Number(gasPrice) <= 1000000 && /^\d+$/.test(updates) && Number(updates) >= 1 && Number(updates) <= 1440;
+  if (valid) { const [whole, fraction = ''] = gasPrice.split('.'); result = runnerBudget({ updateGas: '300000', claimGas: '40000', gasPriceWei: String(BigInt(whole) * 1000000000n + BigInt(fraction.padEnd(9, '0'))), updatesPerDay: updates.replace(/^0+(?=\d)/, ''), premiumBps: '2000', plsRewardReserveWei: '2500000000000000000', runnerShareBps: '5000', availableRunnerBudgetWei: '17500000000000', hasEligibleJackStake: true }); }
+  return <><div className="page-hero runner-hero"><div><Badge>MAINTENANCE BUILT · NOT DEPLOYED</Badge><h1>RUN WITH<br /><span>PURPOSE.</span></h1><p>A permissionless crew for useful on-chain work.<br />First, healthy observations. Then, a funded path toward pDAI support.</p></div><img src={rocket} alt="Jack Rabbit launching on a rocket" /></div><div className="stats-grid three"><Metric label="MAINTENANCE" value="Not active" note="Awaiting verified deployment and budget" /><Metric label="PEG TRADING" value="Disabled" note="No trading implementation is active" /><Metric label="OPERATOR BOND" value="Not required" note="The maintenance design is permissionless" /></div><div className="content-grid"><section className="paper"><SectionTitle eyebrow="RUN THE NUMBERS" title="Can the carrots cover the gas?" /><p>This interactive example estimates operating cost. It does not show live gas prices, earnings or an approved reward.</p><div className="form-grid"><label>Gas price (gwei)<input type="number" min="0.000000001" max="1000000" step="any" value={gasPrice} onChange={e => setGasPrice(e.target.value)} /></label><label>Updates per day<input type="number" min="1" max="1440" step="1" value={updates} onChange={e => setUpdates(e.target.value)} /></label></div><div className="simulation-result" aria-live="polite">{result ? <><span>ILLUSTRATIVE DAILY COST</span><strong>{pls(result.dailyCostWei)} <small>PLS</small></strong><p>Example daily income: {pls(result.firstDayRunnerIncomeWei)} PLS<br />Daily shortfall: {pls(result.firstDayShortfallWei)} PLS</p></> : <p>Enter a positive gas price (up to 9 decimals) and 1–1,440 whole updates per day.</p>}</div><details><summary>What’s behind this example?</summary><p>300,000 update gas + 40,000 withdrawal gas; 20% margin; a 2.5 PLS reward reserve with eligible JACK stakers; 140 ppm daily emissions; 10% emission fee; half of those fees assigned to Runner. These are scenario inputs, not deployed settings. Income declines without new funding; failed bot attempts add costs.</p></details></section><aside className="paper explain"><p className="eyebrow">THE RACE TOWARD $1</p><h2>Build the reserve.<br />Respect the limits.</h2><ol className="steps"><li>Collect identified protocol fees</li><li>Allocate an isolated support reserve</li><li>Validate an independent USD reference</li><li>Enable reviewed, bounded trading</li></ol><p>Only oracle maintenance is implemented. A pDAI/JACK quote alone cannot establish a dollar price or guarantee a peg.</p></aside></div></>;
+}
+function Treasury({ wallet }) { return <><div className="page-intro"><Badge>ACCOUNTING BEFORE AMBITION</Badge><h1>COUNT EVERY<br /><span>CARROT.</span></h1><p>Know what belongs to users, what has been promised, and what can fund the next move.</p></div><div className="stats-grid three"><Metric label="PROTOCOL HOLDINGS" value="—" note="Treasury deployment not verified" /><Metric label="PEG SUPPORT RESERVE" value="—" note="No verified funded reserve" /><Metric label="YOUR JACK" value={wallet.chain === '0x171' ? wallet.balance ?? '—' : '—'} note="Personal wallet balance · not Treasury assets" /></div><section className="paper"><SectionTitle eyebrow="FOLLOW THE RECEIPTS" title="One ecosystem. Separate responsibilities." /><div className="flow-grid">{[['01', 'User principal', 'Withdrawable staking and LP balances stay with their contracts.'], ['02', 'Committed rewards', 'Seed incentives and bond liabilities are already assigned.'], ['03', 'Protocol receipts', 'Classified fees can enter reviewed allocation plans.'], ['04', 'Support capital', 'Dedicated peg reserves remain separate from bot compensation.']].map(([n, title, copy]) => <div className="flow-item" key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></div>)}</div></section><div className="content-grid contracts-grid"><section className="paper"><SectionTitle eyebrow="CHECK THE SOURCE" title="Token addresses" />{[['JACK', JACK], ['pDAI', PDAI]].map(([name, address]) => <div className="address-row" key={name}><strong>{name}</strong><a href={`${EXPLORER}${address}`} target="_blank" rel="noreferrer">{address} ↗</a></div>)}<p className="subtle">These identify the tokens. Ecosystem module addresses will be added only after deployment verification.</p></section><aside className="paper explain"><h2>Market cap isn’t<br />a spending balance.</h2><p>Returned trade capital is not new revenue. Treasury credit is an allowance, not another pot of tokens. Allocations must fit actual uncommitted assets.</p></aside></div></>; }
 export default App;

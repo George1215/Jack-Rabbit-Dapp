@@ -1,0 +1,9 @@
+.DS_Store
+__MACOSX/
+.deps/
+.deploys/
+artifacts/
+contracts/artifacts/
+node_modules/
+.env
+.env.*

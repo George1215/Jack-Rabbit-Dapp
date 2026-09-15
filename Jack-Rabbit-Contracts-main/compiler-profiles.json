@@ -1,0 +1,25 @@
+{
+  "compiler": "0.8.24+commit.e11b9ed9",
+  "undeployedDefault": {
+    "optimizer": { "enabled": true, "runs": 1 },
+    "evmVersion": "paris",
+    "viaIR": false
+  },
+  "undeployedOverrides": {
+    "JackTreasury": {
+      "optimizer": { "enabled": true, "runs": 1 },
+      "evmVersion": "paris",
+      "viaIR": true
+    }
+  },
+  "existingLiveJackReferenceOnly": {
+    "address": "0xc8777079d6f8b490996f3f9dc35c2155ce1875ec",
+    "optimizer": { "enabled": true, "runs": 200 },
+    "evmVersion": "paris",
+    "viaIR": false
+  },
+  "dependencies": {
+    "unversionedOpenZeppelin": "5.0.2",
+    "versionQualifiedOpenZeppelin": "4.9.5"
+  }
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta 
+    name="viewport" 
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Jackies</title>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" 
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="jackies.css" />
+</head>
+<body>
+  <header class="dapp-header">
+    <img src="../assets/jacklogo.png" 
+         alt="Jack Rabbit Logo" 
+         class="header-logo" 
+    />
+    <nav class="header-nav">
+      <button 
+        class="nav-btn" 
+        onclick="location.href='index.html'"
+      >Diamond Hands</button>
+      <button class="nav-btn">Connect wallet</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Jackies!!!</h1>
+      <p>Stake Jack to earn your favourite tokens</p>
+    </section>
+
+    <!-- STAKE / UNSTAKE JACK PANEL -->
+    <section class="pools">
+      <div class="panel-tabs stake-tabs">
+        <button class="tab stake">Stake Jack</button>
+        <button class="tab unstake">Unstake Jack</button>
+      </div>
+      <div class="panel stake-panel">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th></th>
+          <th class="col-desc__text">Token</th>
+          <th class="col-desc__text">Annual % Yield</th>
+          <th class="col-desc__text">Aggregate Pool Size</th>
+          <th class="col-desc__text">Your Current Stake</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="data-row">
+              <td><img src="../assets/jacklogo.png" alt="Jack" class="token-icon" /></td>
+              <td>Jack</td>
+              <td>4.00%</td>
+              <td>32,435,687,285,346</td>
+              <td>3,245,346</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- REWARDS PANEL -->
+    <section class="pools">
+      <div class="panel-tabs rewards-tabs">
+        <button class="tab rewards">Rewards</button>
+      </div>
+      <div class="panel rewards-panel">
+        <ul class="rewards-list">
+          <!-- repeat one <li> per token -->
+          <li class="reward-item">
+            <img src="../assets/pls.svg"   alt="PLS"   class="reward-icon" />
+            <div class="reward-amount">3,346</div>
+            <button class="claim-btn">Claim</button>
+          </li>
+          <li class="reward-item">
+            <img src="../assets/plsx.svg"  alt="PLSX" class="reward-icon" />
+            <div class="reward-amount">1,234</div>
+            <button class="claim-btn">Claim</button>
+          </li>
+          <li class="reward-item">
+            <img src="../assets/hex.svg"   alt="HEX"   class="reward-icon" />
+            <div class="reward-amount">987</div>
+            <button class="claim-btn">Claim</button>
+          </li>
+          <li class="reward-item">
+            <img src="../assets/inc.svg"   alt="INC"   class="reward-icon" />
+            <div class="reward-amount">765</div>
+            <button class="claim-btn">Claim</button>
+          </li>
+          <li class="reward-item">
+            <img src="../assets/pdai.svg"  alt="pDAI"  class="reward-icon" />
+            <div class="reward-amount">543</div>
+            <button class="claim-btn">Claim</button>
+          </li>
+          <li class="reward-item">
+            <img src="../assets/atropa.svg" alt="Atropa"class="reward-icon" />
+            <div class="reward-amount">432</div>
+            <button class="claim-btn">Claim</button>
+          </li>
+          <li class="reward-item">
+            <img src="../assets/teddy.png"  alt="Teddy" class="reward-icon" />
+            <div class="reward-amount">321</div>
+            <button class="claim-btn">Claim</button>
+          </li>
+          <li class="reward-item">
+            <img src="../assets/ptgc.png"  alt="Alien" class="reward-icon" />
+            <div class="reward-amount">210</div>
+            <button class="claim-btn">Claim</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <div id="action-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-input-field">
+        <!-- skewed header -->
+        <h2 class="modal-title">Stake!!!</h2>
+      <div class="modal-panel panel">
+        <!-- inner white bar + inputs -->
+        <div class="modal-inner">
+          <div class="modal-row">
+            <div class="token-field">
+              <img
+                id="modal-token-icon"
+                class="token-field__icon"
+                src="../assets/pls.svg"
+                alt="PLS icon"
+              />
+              <select id="modal-token" class="modal-select">
+                <option value="pls" data-icon="../assets/pls.svg">PLS</option>
+                <option value="plsx" data-icon="../assets/plsx.svg">PLSX</option>
+                <option value="hex" data-icon="../assets/hex.svg">HEX</option>
+              </select>
+              <span class="token-field__arrow">▾</span>
+            </div>
+            <input
+              id="modal-amount"
+              class="modal-input"
+              type="number"
+              placeholder="0.0"
+            />
+          </div>
+        </div>
+    
+        <!-- balance below white bar -->
+        <span class="modal-balance">
+          Balance: <strong id="modal-balance">0</strong>
+        </span>
+    
+        <!-- confirm button -->
+        <div class="modal-footer">
+          <button id="modal-action-btn" class="claim-btn">
+            Confirm Stake
+          </button>
+        </div>
+    
+        <!-- close -->
+        <button class="modal-close">&times;</button>
+      </div>
+      </div>
+    </div>
+  </main>
+  <script src="jackies.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "assumptions": "Illustrative rounded gas allowances, hypothetical 1 gwei, one update/hour; not production settings or live gas data.",
+  "input": {
+    "updateGas": "300000",
+    "claimGas": "40000",
+    "gasPriceWei": "1000000000",
+    "updatesPerDay": "24",
+    "premiumBps": "2000",
+    "plsRewardReserveWei": "2500000000000000000",
+    "runnerShareBps": "5000",
+    "availableRunnerBudgetWei": "17500000000000",
+    "hasEligibleJackStake": true
+  },
+  "result": {
+    "status": "SCENARIO_ONLY",
+    "rewardPerUpdateWei": "408000000000000",
+    "dailyCostWei": "9792000000000000",
+    "firstDayFeeIncomeWei": "35000000000000",
+    "firstDayRunnerIncomeWei": "17500000000000",
+    "firstDayShortfallWei": "9774500000000000",
+    "fundedUpdatesWithoutNewIncome": "0",
+    "requiredOpeningPlsRewardReserveWei": "1398857142857142857143",
+    "equivalentNominalPlsStakeWei": "55954285714285714285720"
+  }
+}

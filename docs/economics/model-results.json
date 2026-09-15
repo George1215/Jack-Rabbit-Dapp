@@ -1,0 +1,139 @@
+{
+  "status": "arithmetic model only; Barrow section reproduces pre-fix behavior; see separate EVM tests for current contracts",
+  "source_sha256": {
+    "Jack-Rabbit-Contracts-main/contracts/Jack.sol": "ff14106cffc79fe131cfced5b0a7ecd3ff9bbe8109d000dc5db704f1e2fae107",
+    "Jack-Rabbit-Contracts-main/contracts/JackBarrow.sol": "369c5a8942e281a646e55de70c38de852b030ca8a271d2849b936475b7c26b06",
+    "Jack-Rabbit-Contracts-main/contracts/JackFarm.sol": "39e19a1e0eaec6a6ae57f2177efd72363155574edffeb10465f1a5416ce0396d",
+    "Jack-Rabbit-Contracts-main/contracts/JackFarmLens.sol": "4153855fde5f0a56d85655df40ad6662561dcf6ba8dcd333cb7a01be81eacb7a",
+    "Jack-Rabbit-Contracts-main/contracts/JackMiner.sol": "2d61dffc767c52279da54547549e12999116af01993f8376b462129809d53dab",
+    "Jack-Rabbit-Contracts-main/contracts/JackOracleHub.sol": "c1219fdc714f7900099e7773ec5c96ea5f4397f7f2e5bd230931cbdbdbde8096",
+    "Jack-Rabbit-Contracts-main/contracts/JackRevenueDistributor.sol": "d67b53255f13e89e41c1e2724d4681fc32bedda4288c7157becf85816f5c770a",
+    "Jack-Rabbit-Contracts-main/contracts/JackStake.sol": "5aae6cf387242a576b3fbe52bacf064da095d8b32cbf9114223574801241a2dc",
+    "Jack-Rabbit-Contracts-main/contracts/JackTreasury.sol": "c666b3c1d509ebe77e245cbf798a69d5d2803d3a0017be43d94613f950639088",
+    "Jack-Rabbit-Contracts-main/contracts/JackTreasuryLens.sol": "56f1a17df5b2e1c579c1a3a7d408b8deb2fb17a955a6a87888d3664456607ac5",
+    "Jack-Rabbit-Contracts-main/contracts/JackTreasurySwapExecutor.sol": "d8f887e9b37ea06641fc01ca5ebc1ade3dbf28e4960ac014df53753755575613",
+    "Jack-Rabbit-Contracts-main/contracts/RouterCheck.sol": "cc0ae2f60f08d727d3b5aee4ac8cfe410bb41ca01573183f967d1253ee03da8c"
+  },
+  "assumptions": [
+    "50,550,000 JACK is the net reserve in primary scenarios, not user stake",
+    "18 decimals, constant default emission and reward fee, no added funds",
+    "reward-update timestamp initialized at model start",
+    "eligible pools remain present throughout active scenarios",
+    "outputs are allocations before JACK transfer fees and user claims",
+    "no prices, trading demand, liquidity, gas or USD revenue are forecast",
+    "fee allocations from the seed are recycled incentives, not new capital"
+  ],
+  "constants": {
+    "emission_ppm": 140,
+    "reward_fee": 200,
+    "fee_divisor": 1000
+  },
+  "scenarios": [
+    {
+      "days": 1,
+      "updates_per_day": 1,
+      "eligible_pools_present": true,
+      "starting_reserve_jack": "50550000.000000000000000000",
+      "remaining_reserve_jack": "50542923.000000000000000000",
+      "gross_allocated_jack": "7077.000000000000000000",
+      "fee_allocation_jack": "1415.400000000000000000",
+      "external_pool_allocation_jack": "5661.600000000000000000"
+    },
+    {
+      "days": 30,
+      "updates_per_day": 1,
+      "eligible_pools_present": true,
+      "starting_reserve_jack": "50550000.000000000000000000",
+      "remaining_reserve_jack": "50338120.426672446382425255",
+      "gross_allocated_jack": "211879.573327553617574745",
+      "fee_allocation_jack": "42375.914665510723514936",
+      "external_pool_allocation_jack": "169503.658662042894059809"
+    },
+    {
+      "days": 90,
+      "updates_per_day": 1,
+      "eligible_pools_present": true,
+      "starting_reserve_jack": "50550000.000000000000000000",
+      "remaining_reserve_jack": "49917021.827843906196561700",
+      "gross_allocated_jack": "632978.172156093803438300",
+      "fee_allocation_jack": "126595.634431218760687623",
+      "external_pool_allocation_jack": "506382.537724875042750677"
+    },
+    {
+      "days": 365,
+      "updates_per_day": 1,
+      "eligible_pools_present": true,
+      "starting_reserve_jack": "50550000.000000000000000000",
+      "remaining_reserve_jack": "48031611.551490512723216371",
+      "gross_allocated_jack": "2518388.448509487276783629",
+      "fee_allocation_jack": "503677.689701897455356580",
+      "external_pool_allocation_jack": "2014710.758807589821427049"
+    },
+    {
+      "days": 365,
+      "updates_per_day": 24,
+      "eligible_pools_present": true,
+      "starting_reserve_jack": "50550000.000000000000000000",
+      "remaining_reserve_jack": "48031776.218145214565661850",
+      "gross_allocated_jack": "2518223.781854785434338150",
+      "fee_allocation_jack": "503644.756370957086864155",
+      "external_pool_allocation_jack": "2014579.025483828347473995"
+    },
+    {
+      "days": 365,
+      "updates_per_day": 1,
+      "eligible_pools_present": false,
+      "starting_reserve_jack": "50550000.000000000000000000",
+      "remaining_reserve_jack": "50550000.000000000000000000",
+      "gross_allocated_jack": "0.000000000000000000",
+      "fee_allocation_jack": "0.000000000000000000",
+      "external_pool_allocation_jack": "0.000000000000000000"
+    }
+  ],
+  "nominal_seed_with_hypothetical_0_1_percent_transfer_fee": {
+    "sent_jack": "50550000.000000000000000000",
+    "transfer_fee_jack": "50550.000000000000000000",
+    "received_jack": "50499450.000000000000000000",
+    "first_day": {
+      "days": 1,
+      "updates_per_day": 1,
+      "eligible_pools_present": true,
+      "starting_reserve_jack": "50499450.000000000000000000",
+      "remaining_reserve_jack": "50492380.077000000000000000",
+      "gross_allocated_jack": "7069.923000000000000000",
+      "fee_allocation_jack": "1413.984600000000000000",
+      "external_pool_allocation_jack": "5655.938400000000000000"
+    }
+  },
+  "barrow_checked_arithmetic_reproduction": [
+    {
+      "term_days": 90,
+      "weak_fee_curve_result": 200
+    },
+    {
+      "term_days": 180,
+      "weak_fee_curve_result": "uint256 subtraction underflow (Solidity panic 0x11)"
+    },
+    {
+      "term_days": 365,
+      "weak_fee_curve_result": 160
+    },
+    {
+      "term_days": 500,
+      "weak_fee_curve_result": "uint256 subtraction underflow (Solidity panic 0x11)"
+    },
+    {
+      "term_days": 730,
+      "weak_fee_curve_result": 130
+    },
+    {
+      "term_days": 1000,
+      "weak_fee_curve_result": "uint256 subtraction underflow (Solidity panic 0x11)"
+    },
+    {
+      "term_days": 1825,
+      "weak_fee_curve_result": 100
+    }
+  ],
+  "validation": "allocation conservation and expected example outputs asserted"
+}

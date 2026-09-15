@@ -1,12 +1,27 @@
-# React + Vite
+# Jack Rabbit dapp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React/Vite interface for the Jack Rabbit ecosystem on PulseChain. Preserves the original rabbit artwork and orange comic style.
 
-Currently, two official plugins are available:
+```sh
+npm ci --ignore-scripts
+npm run dev -- --host 127.0.0.1
+npm run build
+npm run lint
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Pages: Overview, Diamond Hands, Jackies, Farm, Mining, Barrow, Runner and Treasury. Legacy `/dapp/` and `/dapp/jackies.html` URLs redirect into the app.
 
-## Expanding the ESLint configuration
+JACK's identified address is in `src/protocol.js`. Ecosystem module deployments have not been verified, so financial actions are disabled. Connecting an injected wallet permits only a JACK balance read on PulseChain; the app does not request token approvals or financial transactions.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+See [frontend status and verification](docs/frontend/IMPLEMENTATION.md), [economic blueprint](docs/economics/BLUEPRINT.md), and [contract implementation evidence](docs/economics/IMPLEMENTATION.md).
+
+Contract tests have a separate toolchain under `Jack-Rabbit-Contracts-main`:
+
+```sh
+cd Jack-Rabbit-Contracts-main
+npm ci --ignore-scripts --omit=optional
+npm test
+npm run compile
+```
+
+No push or deployment is part of the local development workflow.

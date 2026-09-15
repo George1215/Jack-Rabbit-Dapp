@@ -1,0 +1,60 @@
+{
+  "status": "DRAFT_NOT_FOR_DEPLOYMENT",
+  "units": "Integer token base units; never USD or token market capitalization",
+  "seed": {
+    "asset": "JACK",
+    "nominalMaximumTokens": "50550000",
+    "recipient": "JackStake.externalJackRewardReserve",
+    "accounting": "Use actual received amount; no top-up to offset transfer fees"
+  },
+  "stakeRecipients": {
+    "jackFeeSink": "JackMining",
+    "jackFeeRewardRecipient": "JackRevenueDistributor",
+    "externalFeeRewardRecipient": "JackRevenueDistributor"
+  },
+  "allocationCapsPerReviewedPlan": {
+    "JACK.SeedIncentive": {
+      "Farm": null,
+      "Barrow": null
+    },
+    "JACK.ProtocolFee": {
+      "Farm": null,
+      "Barrow": null,
+      "PegReserve": null
+    },
+    "PLS.ProtocolFee": {
+      "Runner": null,
+      "PegReserve": null
+    },
+    "pDAI.ProtocolFee": {
+      "Farm": null,
+      "PegReserve": null
+    },
+    "ReturnedCapital": {
+      "PegReserve": null
+    }
+  },
+  "controls": {
+    "distributorPlanningEnabled": false,
+    "runnerEnabled": false,
+    "runnerDailyCapWei": null,
+    "runnerRewardPerUpdateWei": null,
+    "runnerIntervalSeconds": null,
+    "reviewDelaySeconds": null,
+    "pegTradingEnabled": false,
+    "grantRunnerOrReserveTreasuryAuthorization": false
+  },
+  "unresolved": [
+    "Verified deployed module addresses and governance owners",
+    "Eligible LP and reward-token configuration",
+    "Per-plan incentive demand and limits",
+    "Measured Runner gas costs and sustainable native PLS receipts",
+    "On-chain policy enforcement versus governance-only controls"
+  ],
+  "miningPrerequisites": {
+    "treasuryHoldingTokens": [
+      "PLS (address zero) when native fees are enabled"
+    ],
+    "note": "Treasury external-token registration does not enable holding-token deposits. Configure both roles separately as needed."
+  }
+}

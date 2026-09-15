@@ -1,0 +1,18 @@
+{
+  "name": "jack-rabbit-contract-tests",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-concurrency=1 test/suite.mjs",
+    "test:regressions": "node --test test/regressions.test.mjs",
+    "compile": "node test/compile.mjs"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "5.0.2",
+    "openzeppelin-v4": "npm:@openzeppelin/contracts@4.9.5",
+    "ethers": "6.13.5",
+    "ganache": "7.9.2",
+    "solc": "0.8.24"
+  }
+}
