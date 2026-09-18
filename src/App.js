@@ -8,28 +8,40 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import Landing from "./pages/Landing";
+import Landing from "./pages/LandingExperience";
+import { UiProvider, PreviewNotice } from "./ui/UiContext";
+import SiteHeader, { SectionTabs } from "./ui/SiteHeader";
+import SiteFooter from "./ui/SiteFooter";
+import { PreviewPortfolioProvider } from "./ui/PreviewPortfolio";
+import StakingFrame from "./ui/StakingFrame";
 import Mining from "./pages/Mining";
-import WeekClaims from "./pages/WeekClaims";
+import WeekClaims from "./pages/ClaimsExperience";
 import Staking from "./pages/Staking";
 import Jackies from "./pages/Jackies";
-import Farms from "./pages/farms";
+import Farms from "./pages/FarmsExperience";
 
-import Treasury from "./pages/Treasury";
-import TreasuryBurnEngine from "./pages/TreasuryBurnEngine";
-import TreasuryVault from "./pages/TreasuryVault";
-import TreasuryActivity from "./pages/TreasuryActivity";
+import Treasury from "./pages/TreasuryExperience";
 
-import NFTBonds from "./pages/NFTBonds";
-import Bonds from "./pages/Bond";
 
-import Navbar from "./components/Navbar";
-import FloatingTabs from "./components/FloatingTabs";
+
+
+import NFTBonds from "./pages/BondMintExperience";
+import Bonds from "./pages/BondPositionsExperience";
+
+
 
 import "./App.css";
+import "./ui/Experience.css";
+
+const OriginalStory = React.lazy(() => import("./pages/Landing"));
+const SwapPage = React.lazy(() => import("./pages/Landing").then(m => ({default: m.BuyJackSwapSection})));
 
 function AnimatedRoutes() {
   const location = useLocation();
+  useEffect(() => {
+    const names = {stake:"External Staking",jackies:"JACK Staking",farms:"Farms",mining:"Mining",nfts:"Bond NFTs",treasury:"Treasury",swap:"Swap",story:"Illustrated Story"};
+    document.title = `${names[location.pathname.split("/")[1]] || "Explore the Burrow"} · Jack Rabbit`;
+  }, [location.pathname]);
 
   const [displayLocation, setDisplayLocation] = useState(location);
   const [transitionStage, setTransitionStage] = useState("fadeIn");
@@ -70,15 +82,18 @@ function AnimatedRoutes() {
   }, [location, displayLocation]);
 
   return (
-    <div className={`page-transition-shell ${transitionStage}`}>
+    <div id="main-content" tabIndex={-1} className={`page-transition-shell ${transitionStage} jr-route jr-route-${displayLocation.pathname.split("/")[1] || "home"}`}>
+      <React.Suspense fallback={<div className="jr-empty" role="status">Opening the burrow…</div>}>
       <Routes location={displayLocation}>
         {/* LANDING */}
         <Route path="/" element={<Landing />} />
+        <Route path="/story" element={<OriginalStory />} />
+        <Route path="/swap" element={<div className="jr-existing-swap"><SwapPage /></div>} />
 
         {/* JACK STAKE AREA */}
-        <Route path="/stake/*" element={<Staking />} />
-        <Route path="/jackies" element={<Jackies />} />
-        <Route path="/jackies/*" element={<Jackies />} />
+        <Route path="/stake/*" element={<StakingFrame><Staking /></StakingFrame>} />
+        <Route path="/jackies" element={<StakingFrame><Jackies /></StakingFrame>} />
+        <Route path="/jackies/*" element={<StakingFrame><Jackies /></StakingFrame>} />
 
         {/* OLD /DIAMOND PATH SUPPORT */}
         <Route path="/diamond" element={<Navigate to="/stake" replace />} />
@@ -122,10 +137,10 @@ function AnimatedRoutes() {
         {/* TREASURY PAGES */}
         <Route path="/treasury" element={<Treasury />} />
         <Route path="/treasury/overview" element={<Navigate to="/treasury" replace />} />
-        <Route path="/treasury/burn" element={<TreasuryBurnEngine />} />
+        <Route path="/treasury/burn" element={<Treasury view="burn" />} />
         <Route path="/treasury/burn-engine" element={<Navigate to="/treasury/burn" replace />} />
-        <Route path="/treasury/vault" element={<TreasuryVault />} />
-        <Route path="/treasury/activity" element={<TreasuryActivity />} />
+        <Route path="/treasury/vault" element={<Treasury view="vault" />} />
+        <Route path="/treasury/activity" element={<Treasury view="activity" />} />
 
         {/* WRONG TREASURY CHILD ROUTES */}
         <Route path="/treasury/*" element={<Navigate to="/treasury" replace />} />
@@ -133,18 +148,23 @@ function AnimatedRoutes() {
         {/* FALLBACK */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </React.Suspense>
     </div>
   );
 }
 
 export default function App() {
   return (
+    <UiProvider>
+    <PreviewPortfolioProvider>
     <BrowserRouter>
-      <Navbar priceUsd={0.0001} />
-
-      <FloatingTabs />
-
+      <SiteHeader />
+      <PreviewNotice />
+      <SectionTabs />
       <AnimatedRoutes />
+      <SiteFooter />
     </BrowserRouter>
+    </PreviewPortfolioProvider>
+    </UiProvider>
   );
 }

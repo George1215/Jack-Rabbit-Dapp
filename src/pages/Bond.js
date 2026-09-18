@@ -12,7 +12,7 @@ const MAX_BOND_DAYS = 1825;
 const MAX_PREMIUM_PCT = 25;
 const LIST_PAGE_SIZE = 5;
 
-const INITIAL_BONDS = [
+export const INITIAL_BONDS = [
   {
     id: "JB-1001",
     pdai: 8500,

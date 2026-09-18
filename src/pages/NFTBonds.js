@@ -15,7 +15,7 @@ const MIN_BOND_DAYS = 180;
 const MAX_BOND_DAYS = 1825;
 const MAX_PREMIUM_PCT = 25;
 
-const RISKY_BONDS = [
+export const RISKY_BONDS = [
   {
     id: "JB-0077",
     owner: "0x7F...92B",

@@ -1,3 +1,4 @@
+import { IS_UI_PREVIEW } from "../ui/UiContext";
 // src/pages/Diamond.js
 import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import styles from "../styles/Diamond.module.css";
@@ -311,6 +312,7 @@ const jackStake = useMemo(() => {
   }, [showToast]);
 
   const autoConnect = useCallback(async () => {
+    if (IS_UI_PREVIEW) return;
     try {
       if (!window.ethereum) return;
 
@@ -998,7 +1000,7 @@ const onProcessDay = useCallback(async () => {
                 <button
                   type="button"
                   className={styles["reward-pill"]}
-                  onClick={onProcessDay}
+                  data-transaction="onProcessDay" onClick={onProcessDay}
                   disabled={!isConnected || loadingPools}
                   title={
                     !isConnected
@@ -1051,7 +1053,7 @@ const onProcessDay = useCallback(async () => {
                         className={`${styles["claim-btn"]} ${
                           !isConnected || (p.pendingJackRaw ?? 0n) <= 0n ? styles["claim-disabled"] : ""
                         }`}
-                        onClick={() => onClaimJack(p)}
+                        data-transaction="Claim JACK" onClick={() => onClaimJack(p)}
                         disabled={!isConnected || (p.pendingJackRaw ?? 0n) <= 0n}
                         title={
                           !isConnected
@@ -1184,7 +1186,7 @@ const onProcessDay = useCallback(async () => {
                   <strong>{Number(userBalance || 0).toFixed(4)}</strong> {selectedPool?.symbol || ""}
                 </span>
 
-                <button className={styles.claimBtn} onClick={confirmAction}>
+                <button className={styles.claimBtn} data-transaction="confirmAction" onClick={confirmAction}>
                   {activePoolTab === "stake" ? "Stake" : "Unstake"}
                 </button>
               </div>

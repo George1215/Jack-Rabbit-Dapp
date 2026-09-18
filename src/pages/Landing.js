@@ -737,7 +737,7 @@ function renderTokenIcon(token, className) {
   return <span>{token?.icon || "•"}</span>;
 }
 
-function BuyJackSwapSection() {
+export function BuyJackSwapSection() {
   const [selectedSymbol, setSelectedSymbol] = useState("pDAI");
   const [payAmount, setPayAmount] = useState("1");
   const [tokenMenuOpen, setTokenMenuOpen] = useState(false);
@@ -1267,7 +1267,7 @@ function BuyJackSwapSection() {
               <button
                 type="button"
                 className={styles.buyJackConnectBtn}
-                onClick={connectWallet}
+                data-transaction="connectWallet" onClick={connectWallet}
                 disabled={connecting}
               >
                 {account
@@ -1464,7 +1464,7 @@ function BuyJackSwapSection() {
             <button
               type="button"
               className={styles.buyJackMainBtn}
-              onClick={swapMissionTokenForJack}
+              data-transaction="swapMissionTokenForJack" onClick={swapMissionTokenForJack}
               disabled={!canSwap}
             >
               {swapping
@@ -2665,7 +2665,7 @@ useEffect(() => {
     <div className={styles.app}>
       <div className={styles.topBar}>
         <img src={jacklogo} alt="Jack Logo" className={styles.logo} />
-        <button className={styles.dappButton}>Dapp</button>
+        <a href="/stake" className={styles.dappButton}>Explore the dApp →</a>
       </div>
 
       <div className={styles.hero}>
@@ -2689,7 +2689,7 @@ useEffect(() => {
                   <span>JACK SAYS:</span> ADD TOKEN TO WALLET
                 </div>
 
-                <button className={styles.addTokenBtn} onClick={addJackToWallet}>
+                <button className={styles.addTokenBtn} data-transaction="addJackToWallet" onClick={addJackToWallet}>
                   $JACK
                 </button>
               </div>
@@ -2703,7 +2703,7 @@ useEffect(() => {
               </div>
 
               <div className={styles.bottomNote}>
-                Verified Jack Rabbit contract address 0xC8777079D6f8b490996f3f9dC35C2155CE1875eC
+                Contract configuration must be verified before signing.
               </div>
             </div>
           </div>

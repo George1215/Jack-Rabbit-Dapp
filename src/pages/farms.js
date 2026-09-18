@@ -16,7 +16,7 @@ import carrotIcon from "../assets/cartoon_carrot_with_green_leaves.png";
 const STAGE_WIDTH = 1672;
 const STAGE_HEIGHT = 1460;
 
-const TOKEN_META = {
+export const TOKEN_META = {
   jack: {
     label: "JACK",
     icon: jackIcon,
@@ -73,7 +73,7 @@ const TOKEN_META = {
   },
 };
 
-const INITIAL_FARMS = [
+export const INITIAL_FARMS = [
   {
     id: "jack-pls",
     pair: "JACK-PLS",

@@ -1,3 +1,4 @@
+import { IS_UI_PREVIEW } from "../ui/UiContext";
 // src/pages/Jackies.js
 import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import {
@@ -132,7 +133,7 @@ export default function Jackies() {
   const [jackName, setJackName] = useState("JackRabbit");
 
   // PLS marker
-  const [plsMarker, setPlsMarker] = useState("");
+  const [, setPlsMarker] = useState("");
 
   // Live staking data
   const [loadingStake, setLoadingStake] = useState(false);
@@ -249,6 +250,7 @@ export default function Jackies() {
   }, [showToast]);
 
   const autoConnect = useCallback(async () => {
+    if (IS_UI_PREVIEW) return;
     try {
       if (!window.ethereum) return;
 
@@ -785,7 +787,7 @@ export default function Jackies() {
               <button
                 type="button"
                 className={styles.chip}
-                onClick={isConnected ? () => loadJackiesData(false) : connectWallet}
+                data-transaction="Connect or refresh wallet" onClick={isConnected ? () => loadJackiesData(false) : connectWallet}
                 disabled={loadingStake}
               >
                 <span className={`${styles["chip-dot"]} ${styles.red}`}></span>
@@ -897,7 +899,7 @@ export default function Jackies() {
                 <button
                   type="button"
                   className={styles["reward-pill"]}
-                  onClick={onSyncRewards}
+                  data-transaction="onSyncRewards" onClick={onSyncRewards}
                   disabled={!isConnected || loadingStake || rewardRows.length === 0}
                   title={
                     !isConnected
@@ -971,7 +973,7 @@ export default function Jackies() {
                         className={`${styles["claim-btn"]} ${
                           isDisabled ? styles["claim-disabled"] : ""
                         }`}
-                        onClick={() => onClaimExternalToken(row)}
+                        data-transaction="Claim rewards" onClick={() => onClaimExternalToken(row)}
                         disabled={isDisabled}
                         title={
                           !isConnected
@@ -1038,7 +1040,7 @@ export default function Jackies() {
                   <strong>{trimBalanceText(userBalance, 4)}</strong> {jackSymbol}
                 </span>
 
-                <button className={styles.claimBtn} onClick={confirmAction}>
+                <button className={styles.claimBtn} data-transaction="confirmAction" onClick={confirmAction}>
                   {activePoolTab === "stake" ? "Stake" : "Unstake"}
                 </button>
               </div>

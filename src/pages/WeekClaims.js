@@ -35,7 +35,7 @@ import clockIcon from "../assets/clock_icon_real_transparent.png";
 
 const MINERS_PER_PAGE = 10;
 
-const liveMiners = [
+export const liveMiners = [
   {
     id: "#1247",
     week: "Week #3",
@@ -173,7 +173,7 @@ const liveMiners = [
   },
 ];
 
-const claimMiners = [
+export const claimMiners = [
   {
     id: "#1235",
     week: "Week #1",

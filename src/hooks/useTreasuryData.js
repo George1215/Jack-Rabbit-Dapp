@@ -1,3 +1,4 @@
+import { IS_UI_PREVIEW } from "../ui/UiContext";
 // src/hooks/useTreasuryData.js
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ethers } from "ethers";
@@ -1165,6 +1166,7 @@ export default function useTreasuryData() {
   }, [refreshOverview, refreshVault]);
 
   useEffect(() => {
+    if (IS_UI_PREVIEW) return;
     if (CONFIG.RPC_URL) {
       try {
         setRpcProvider(new ethers.JsonRpcProvider(CONFIG.RPC_URL));
@@ -1188,7 +1190,7 @@ export default function useTreasuryData() {
   }, [CONFIG.RPC_URL]);
 
   useEffect(() => {
-    if (!window.ethereum) return;
+    if (IS_UI_PREVIEW || !window.ethereum) return;
 
     const onAccountsChanged = (accounts) => {
       if (!accounts || !accounts.length) {
